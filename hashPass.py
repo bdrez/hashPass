@@ -5,7 +5,7 @@ from collections import defaultdict
 first time user and then ask the user to enter the username and password and double check with the hash
 '''
 
-ef user_status():
+def user_status():
     #here we will see if its a first time user and were storing the data or if its an old user logging in 
     #maybe do something abt if they enter nonsense that doesnt start with y or n
     resp=input("Are you a new user? Enter yes or no ")
@@ -50,6 +50,7 @@ def hashCheck(em, a, b):
     #loop back to reenter password?
 
 user_status()
+
 
 
 
