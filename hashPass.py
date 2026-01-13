@@ -1,4 +1,5 @@
 import hashlib
+from collections import defaultdict
 '''
  take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
@@ -49,5 +50,6 @@ def hashCheck(em, a, b):
     #loop back to reenter password?
 
 user_status()
+
 
 
