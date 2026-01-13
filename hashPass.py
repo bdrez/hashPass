@@ -18,7 +18,8 @@ def user_status():
     else :
         #can do else bec at the top we made sure only two possible answers here 
         #call checking function
-        print('input checking function')
+        verify_user()
+        #print('input checking function')
     
         
 
@@ -49,7 +50,15 @@ def hashCheck(em, a, b):
         input_new_user() #go back to allow them to enter new information?
     #loop back to reenter password?
 
+def verify_user():
+    user_email =input("enter your email ") 
+    user_pass=input("enter your password ")
+    #they enter username and password check if the email ad the hash of the password are in and match 
+
+
+
 user_status()
+
 
 
 
