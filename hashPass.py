@@ -17,19 +17,20 @@ def user_status():
     else :
         #can do else bec at the top we made sure only two possible answers here 
         #call checking function
-        print('input checking function')    
+        print('input checking function')
+    
         
 
 def input_new_user():
     user_email =input("enter your email ") #do the string regex to make sure it ends in @gmail @email @yahoo etc .com
     user_pass=input("enter your password ")
     double_pass=input("please enter your password again to verify ")
-    hashCheck(email, user_pass, double_pass)
+    hashCheck(user_email, user_pass, double_pass)
 
 
 def hashCheck(em, a, b):
-    db=defaultdict(str)
     #create out dict that we will use to store email/password
+    db=defaultdict(str)
     md5_pass1=hashlib.md5()
     md5_pass2=hashlib.md5()
     md5_pass1.update(a.encode()) #we need to encode to convert from string to byte so we can hash
@@ -40,6 +41,8 @@ def hashCheck(em, a, b):
         #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
         if em not in db:
             db[em]=md5_pass1
+            print("enter in date base")
+            print(db)
     else:
         print("passwords dont match") 
         input_new_user() #go back to allow them to enter new information?
