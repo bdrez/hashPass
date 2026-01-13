@@ -5,7 +5,7 @@ from collections import defaultdict
 first time user and then ask the user to enter the username and password and double check with the hash
 '''
 
-def user_status():
+ef user_status():
     #here we will see if its a first time user and were storing the data or if its an old user logging in 
     #maybe do something abt if they enter nonsense that doesnt start with y or n
     resp=input("Are you a new user? Enter yes or no ")
@@ -41,8 +41,8 @@ def hashCheck(em, a, b):
     if digest1==digest2:
         #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
         if em not in db:
-            db[em]=md5_pass1
-            print("enter in date base")
+            db[em]=digest1
+            print("user entered into date base")
             print(db)
     else:
         print("passwords dont match") 
@@ -50,6 +50,7 @@ def hashCheck(em, a, b):
     #loop back to reenter password?
 
 user_status()
+
 
 
 
