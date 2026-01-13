@@ -1,4 +1,3 @@
 # hashPass
-The purpose of this project is to mimic user authentication. The user will enter its email and password and the code will double check the password with the stored hash 
-password the user enters the first time. 
+The purpose of this project is to mimic a user authentication. The user will enter their email and password and the code will double check the entered password with the stored hash password to verify the user. 
 
