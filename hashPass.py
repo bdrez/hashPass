@@ -5,6 +5,9 @@ from collections import defaultdict
 first time user and then ask the user to enter the username and password and double check with the hash
 '''
 
+#create out dict that we will use to store email/password
+db=defaultdict(str)
+
 def user_status():
     #here we will see if its a first time user and were storing the data or if its an old user logging in 
     #maybe do something abt if they enter nonsense that doesnt start with y or n
@@ -17,7 +20,6 @@ def user_status():
         input_new_user()
     else :
         #can do else bec at the top we made sure only two possible answers here 
-        #call checking function
         verify_user()
         #print('input checking function')
     
@@ -31,8 +33,6 @@ def input_new_user():
 
 
 def hashCheck(em, a, b):
-    #create out dict that we will use to store email/password
-    db=defaultdict(str)
     md5_pass1=hashlib.md5()
     md5_pass2=hashlib.md5()
     md5_pass1.update(a.encode()) #we need to encode to convert from string to byte so we can hash
@@ -44,7 +44,8 @@ def hashCheck(em, a, b):
         if em not in db:
             db[em]=digest1
             print("user entered into date base")
-            print(db)
+            print(db) #iterate over it to print better 
+            #now give them the opportunity to log in 
     else:
         print("passwords dont match") 
         input_new_user() #go back to allow them to enter new information?
@@ -54,10 +55,28 @@ def verify_user():
     user_email =input("enter your email ") 
     user_pass=input("enter your password ")
     #they enter username and password check if the email ad the hash of the password are in and match 
-
-
+    md5_ver=hashlib.md5()
+    md5_ver.update(user_pass.encode())
+    hex_ver=md5_ver.hexdigest()
+    for k, v in db.values():
+        if k==user_email and v==hex_ver:
+            print("user logged in sucsesful")
+        elif k==user_email and v!=hex_ver:
+            print("Password incorrect")
+            input_new_user() #maybe make a new one so doesnt ask twice 
+        else:
+            print("User not found in system.")
+            respo=input("Press y to create and account. Press x to exit program.")
+            while resp[0].lower()!='y' and resp[0].lower()!='n':
+                print("Invalid response. Enter yes or no.")
+            if resp[0].lower()=='y' :
+                input_new_user()
+            else :
+                print("bye bye")
+                break 
 
 user_status()
+
 
 
 
