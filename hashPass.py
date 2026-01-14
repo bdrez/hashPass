@@ -5,8 +5,9 @@ from collections import defaultdict
 first time user and then ask the user to enter the username and password and double check with the hash
 '''
 
+#create out dict that we will use to store email/password
 db=defaultdict(str)
-db={'b@gmail.com':123}#test case
+db={'b@gmail.com': '202cb962ac59075b964b07152d234b70' }#test case
 
 
 def user_status():
