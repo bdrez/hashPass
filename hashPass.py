@@ -8,13 +8,14 @@ first time user and then ask the user to enter the username and password and dou
 db=defaultdict(str)
 db={'b@gmail.com':123}#test case
 
+
 def user_status():
     #here we will see if its a first time user and were storing the data or if its an old user logging in 
     #maybe do something abt if they enter nonsense that doesnt start with y or n
     resp=input("Are you a new user? Enter yes or no ")
     while resp[0].lower()!='y' and resp[0].lower()!='n':
-            print("Invalid response. Enter yes or no.")
-            resp=input("Are you a new user? ")
+            resp=input("Invalid response. Enter yes or no.")
+            #resp=input("Are you a new user? ")
     if resp[0].lower()=='y' :
         #since were converting the response to .lower will be good no matter if they put upper or lower so only check once
         input_new_user()
@@ -78,7 +79,7 @@ def verify_user():
     md5_ver=hashlib.md5()
     md5_ver.update(user_pass.encode())
     hex_ver=md5_ver.hexdigest()
-    for k, v in db.values(): #somethings wrong here
+    for k, v in db.items(): #somethings wrong here
         if k==user_email and v==hex_ver:
             print("user logged in sucsesful")
         elif k==user_email and v!=hex_ver:
@@ -86,7 +87,7 @@ def verify_user():
             input_new_user() #maybe make a new one so doesnt ask twice 
         else:
             print("User not found in system.")
-            respo=input("Press y to create and account. Press x to exit program.")
+            resp=input("Press y to create and account. Press x to exit program.")
             while resp[0].lower()!='y' and resp[0].lower()!='n':
                 print("Invalid response. Enter yes or no.")
             if resp[0].lower()=='y' :
@@ -97,6 +98,7 @@ def verify_user():
                 return
 
 user_status()
+
 
 
 
