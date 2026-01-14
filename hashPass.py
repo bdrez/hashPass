@@ -5,8 +5,8 @@ from collections import defaultdict
 first time user and then ask the user to enter the username and password and double check with the hash
 '''
 
-#create out dict that we will use to store email/password
 db=defaultdict(str)
+db={'b@gmail.com':123}#test case
 
 def user_status():
     #here we will see if its a first time user and were storing the data or if its an old user logging in 
@@ -27,6 +27,15 @@ def user_status():
 
 def input_new_user():
     user_email =input("enter your email ") #do the string regex to make sure it ends in @gmail @email @yahoo etc .com
+    if user_email in db:
+        resp=input('Account already created. Enter yes to sign in and no to exit.')
+        while resp[0].lower()!='y' and resp[0].lower()!='n':
+                print("Invalid response. Enter yes to log in and no to leave.")
+        if resp[0].lower()=='y' :
+            verify_user()
+        else:
+            print("bye bye")
+            return 
     user_pass=input("enter your password ")
     double_pass=input("please enter your password again to verify ")
     hashCheck(user_email, user_pass, double_pass)
@@ -88,6 +97,7 @@ def verify_user():
                 return
 
 user_status()
+
 
 
 
