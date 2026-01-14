@@ -46,6 +46,17 @@ def hashCheck(em, a, b):
             print("user entered into date base")
             print(db) #iterate over it to print better 
             #now give them the opportunity to log in 
+            resp=input("Would you like to log in? Enter Y or N ")
+            while resp[0].lower()!='y' and resp[0].lower()!='n':
+                print("Invalid response. Enter yes to log in and no to leave.")
+                resp=input("Are you a new user? ")
+            if resp[0].lower()=='y' :
+                verify_user()
+            else:
+                print("bye bye")
+                # only be used inside of a loop break  
+                return 
+
     else:
         print("passwords dont match") 
         input_new_user() #go back to allow them to enter new information?
@@ -58,7 +69,7 @@ def verify_user():
     md5_ver=hashlib.md5()
     md5_ver.update(user_pass.encode())
     hex_ver=md5_ver.hexdigest()
-    for k, v in db.values():
+    for k, v in db.values(): #somethings wrong here
         if k==user_email and v==hex_ver:
             print("user logged in sucsesful")
         elif k==user_email and v!=hex_ver:
@@ -73,9 +84,11 @@ def verify_user():
                 input_new_user()
             else :
                 print("bye bye")
-                break 
+                # can only be used inside of a loop break 
+                return
 
 user_status()
+
 
 
 
