@@ -4,7 +4,7 @@ import re
 def email_ending(ema):
     #the patter will be the email address domain and the em will be the email were searching 
     pattern="^[a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@(email.com|gmail.com|yahoo.com|aol.com|hotmail.com|icloud.com)$"
-    #took the allowed charchters in an email address from stack overfllow 
+    #took the allowed charchters in an email address from stack overflow 
     ending=re.search(pattern, ema)
     #result = find_first('Harker$')
     if ending!=None:
