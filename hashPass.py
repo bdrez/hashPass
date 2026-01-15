@@ -6,7 +6,6 @@ first time user and then ask the user to enter the username and password and dou
 '''
 
 #create out dict that we will use to store email/password
-#create out dict that we will use to store email/password
 db=defaultdict(str)
 db={'b@gmail.com': '202cb962ac59075b964b07152d234b70' }#test case
 
@@ -104,4 +103,3 @@ def verify_user():
             return
 
 user_status()
-
