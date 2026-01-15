@@ -25,11 +25,13 @@ def user_status():
         verify_user()
         #OKAY THIS WORKS
         #print('input checking function')
+
     
         
 
 def input_new_user():
     user_email =input("enter your email ") #do the string regex to make sure it ends in @gmail @email @yahoo etc .com
+    email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
     #do something to make sure they cannot enter nothing-for both 
     if user_email in db:
         resp=input('Account already created. Enter yes to sign in and no to exit.')
@@ -76,7 +78,8 @@ def hashCheck(em, a, b):
     #loop back to reenter password?
 
 def verify_user():
-    user_email =input("enter your email ") 
+    user_email =input("enter your email ")
+    email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
     user_pass=input("enter your password ")
     #they enter username and password check if the email ad the hash of the password are in and match 
     md5_ver=hashlib.md5()
@@ -103,3 +106,4 @@ def verify_user():
             return
 
 user_status()
+
