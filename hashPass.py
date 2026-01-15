@@ -1,10 +1,16 @@
 import hashlib
 from collections import defaultdict
 '''
- take in the username and pasword then hash the password to store for
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
+ai explination Built a Python CLI authentication system demonstrating password hashing, credential verification, and input validation
 '''
-
+''' we ask them to verify password after we will generate a random salt and add that to the dicitonary if the passwords match, 
+then later when they log in we will ask for password and email and combind that password with the salt hash that and check to see 
+if its a match'''
+#create out dict that we will use to store email/password
 db=defaultdict(str)
 db={'b@gmail.com': '202cb962ac59075b964b07152d234b70' }#test case
 
@@ -104,14 +110,3 @@ def verify_user():
             return
 
 user_status()
-
-
-
-
-
-
-
-
-
-
-
