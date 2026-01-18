@@ -1,9 +1,15 @@
 import hashlib
 from collections import defaultdict
+from regexRegulator import email_ending
 '''
- take in the username and pasword then hash the password to store for
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
+ai explination Built a Python CLI authentication system demonstrating password hashing, credential verification, and input validation
 '''
+
+#maybe make one function to check them
 
 #create out dict that we will use to store email/password
 db=defaultdict(str)
@@ -31,7 +37,12 @@ def user_status():
 
 def input_new_user():
     user_email =input("enter your email ") #do the string regex to make sure it ends in @gmail @email @yahoo etc .com
-    email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
+    em_flag=False #flag set to check the email
+    em_flag=email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
+    while em_flag==False:
+        print("Invalid email address ")
+        user_email =input("enter your email ")
+        em_flag=email_ending(user_email)
     #do something to make sure they cannot enter nothing-for both 
     if user_email in db:
         resp=input('Account already created. Enter yes to sign in and no to exit.')
@@ -106,4 +117,3 @@ def verify_user():
             return
 
 user_status()
-
