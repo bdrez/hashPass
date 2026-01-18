@@ -11,6 +11,11 @@ def email_ending(ema):
     if ending!=None:
         return #valid email we return
     if ending==None: #means the search was unsucsesful is value is None
-        print("Invalid email address")
+        #print("Invalid email address")
+        return False
         #go back to enter an email? to log in a user 
         #gmail.com, email.com, yahoo.com hotmail.com, aol.com  use top five popular ones
+
+#set a flag to false and loop though keep asking to enter proper email
+#loop untill enter a correct email switch the flag and send it back to other code
+#the other code will have a vairbale and fall this code so we use that for the email 
