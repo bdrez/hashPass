@@ -6,10 +6,10 @@ use a struct or a dict with key values maybe take in the username and pasword th
 first time user and then ask the user to enter the username and password and double check with the hash
 so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
 check then once in system user can enter infroamtion check if the hash they enter matches and log in
-ai explination Built a Python CLI authentication system demonstrating password hashing, credential verification, and input validation
 '''
 
 #maybe make one function to check them
+#change the hash from md5 to a more secure verison 
 
 #create out dict that we will use to store email/password
 db=defaultdict(str)
@@ -19,9 +19,9 @@ db={'b@gmail.com': '202cb962ac59075b964b07152d234b70' }#test case
 def user_status():
     #here we will see if its a first time user and were storing the data or if its an old user logging in 
     #maybe do something abt if they enter nonsense that doesnt start with y or n
-    resp=input("Are you a new user? Enter yes or no ")
+    resp=input("Are you a new user? Enter yes or no: ")
     while resp[0].lower()!='y' and resp[0].lower()!='n':
-            resp=input("Invalid response. Enter yes for new user or no for exisiting account log in.")
+            resp=input("Invalid response. Enter yes for new user or no to log into an existing account: ")
             #resp=input("Are you a new user? ")
     if resp[0].lower()=='y' :
         #since were converting the response to .lower will be good no matter if they put upper or lower so only check once
@@ -36,25 +36,25 @@ def user_status():
         
 
 def input_new_user():
-    user_email =input("enter your email ") #do the string regex to make sure it ends in @gmail @email @yahoo etc .com
+    user_email =input("Enter your email: ") 
     em_flag=False #flag set to check the email
     em_flag=email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
     while em_flag==False:
-        print("Invalid email address ")
-        user_email =input("enter your email ")
+        print("Invalid email address! ")
+        user_email =input("Enter your email: ")
         em_flag=email_ending(user_email)
     #do something to make sure they cannot enter nothing-for both 
     if user_email in db:
-        resp=input('Account already created. Enter yes to sign in and no to exit.')
+        resp=input('Account already created. Enter yes to sign in and no to exit: ')
         while resp[0].lower()!='y' and resp[0].lower()!='n':
-                print("Invalid response. Enter yes to log in and no to leave.")
+                print("Invalid response. Enter yes to log in and no to leave: ")
         if resp[0].lower()=='y' :
             verify_user()
         else:
-            print("bye bye")
+            print("Bye Bye!")
             return 
-    user_pass=input("enter your password ")
-    double_pass=input("please enter your password again to verify ")
+    user_pass=input("Enter your password: ")
+    double_pass=input("Please enter your password again to verify: ")
     hashCheck(user_email, user_pass, double_pass)
 
 
@@ -69,34 +69,34 @@ def hashCheck(em, a, b):
         #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
         if em not in db:
             db[em]=digest1
-            print("user entered into date base")
+            print("User entered into date base.")
             print(db) #iterate over it to print better 
             #now give them the opportunity to log in 
-            resp=input("Would you like to log in? Enter Y or N ")
+            resp=input("Would you like to log in? Enter yes or no: ")
             while resp[0].lower()!='y' and resp[0].lower()!='n':
-                print("Invalid response. Enter yes to log in and no to leave.")
+                print("Invalid response. Enter yes to log in and no to leave: ")
                 resp=input("Are you a new user? ")
             if resp[0].lower()=='y' :
                 verify_user()
             else:
-                print("bye bye")
+                print("Bye Bye!")
                 # only be used inside of a loop break  
                 return 
 
     else:
-        print("passwords dont match") 
+        print("Password does not match!") 
         input_new_user() #go back to allow them to enter new information?
     #loop back to reenter password?
 
 def verify_user():
-    user_email =input("enter your email ")
+    user_email =input("Enter your email: ")
     em_flag=False
     em_flag=email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
     while em_flag==False:
-         print("Invalid email address ")
-         user_email =input("enter your email ")
+         print("Invalid email address! ")
+         user_email =input("Enter your email: ")
          em_flag=email_ending(user_email)
-    user_pass=input("enter your password ")
+    user_pass=input("Enter your password: ")
     #they enter username and password check if the email ad the hash of the password are in and match 
     md5_ver=hashlib.md5()
     md5_ver.update(user_pass.encode())
@@ -104,21 +104,21 @@ def verify_user():
     flag=False #will use this to flag 
     for k, v in db.items(): #somethings wrong here
         if k==user_email and v==hex_ver:
-            print("user logged in sucsesful")
+            print("User successfully logged in! ")
             flag=True
         if k==user_email and v!=hex_ver:
-            print("Password incorrect")
+            print("Password is incorrect! ")
             flag=True
-            input_new_user() #maybe make a new one so doesnt ask twice 
+            verify_user() #maybe make a new one so doesnt ask twice 
     if flag==False:
-        print("User not found in system.")
-        resp=input("Press y to create and account. Press n to exit program.")
+        print("User not found in system. ")
+        resp=input("Press yes to create and account. Press no to exit the program: ")
         while resp[0].lower()!='y' and resp[0].lower()!='n':
-            resp=input("Invalid response. Enter yes or no.")
+            resp=input("Invalid response. Enter yes or no:")
         if resp[0].lower()=='y' :
             input_new_user()
         else :
-            print("bye bye")
+            print("Bye Bye!")
             return
 
 user_status()
