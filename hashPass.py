@@ -2,8 +2,10 @@ import hashlib
 from collections import defaultdict
 from regexRegulator import email_ending
 '''
-take in the username and pasword then hash the password to store for first time user and then ask the user to enter 
-the username and password and double check with the hash
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
+first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
 '''
 
 #maybe make one function to check them
@@ -87,6 +89,7 @@ def hashCheck(em, a, b):
     #loop back to reenter password?
 
 def verify_user():
+    pass_Atempt=3 #number of times they can try to log in with incorrect passw0rd
     user_email =input("Enter your email: ")
     em_flag=False
     em_flag=email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
@@ -101,13 +104,19 @@ def verify_user():
     hex_ver=md5_ver.hexdigest()
     flag=False #will use this to flag 
     for k, v in db.items(): #somethings wrong here
+    #error bec we are iterating over a dictionary that changes sizes
         if k==user_email and v==hex_ver:
             print("User successfully logged in! ")
             flag=True
         if k==user_email and v!=hex_ver:
+            pass_Atempt-1 #counting down once 0 log out
             print("Password is incorrect! ")
             flag=True
-            verify_user() #maybe make a new one so doesnt ask twice 
+            if pass_Atempt>0:
+                verify_user() #maybe make a new one so doesnt ask twice 
+            else:
+                print("Bye Bye!")
+                return  
     if flag==False:
         print("User not found in system. ")
         resp=input("Press yes to create and account. Press no to exit the program: ")
@@ -120,4 +129,3 @@ def verify_user():
             return
 
 user_status()
-
