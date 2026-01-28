@@ -107,7 +107,7 @@ def verify_user():
             print("User successfully logged in! ")
             flag=True
         if k==user_email and v!=hex_ver:
-            pass_Atempt-1 #counting down once 0 log out
+            pass_Atempt-=1 #counting down once 0 log out
             print("Password is incorrect! ")
             flag=True
             if pass_Atempt>0:
@@ -127,4 +127,5 @@ def verify_user():
             return
 
 user_status()
+
 
