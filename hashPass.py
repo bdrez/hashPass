@@ -2,8 +2,10 @@ import hashlib
 from collections import defaultdict
 from regexRegulator import email_ending
 '''
- take in the username and pasword then hash the password to store for first time user and then ask the user to enter 
-the username and password and double check with the hash
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
+first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
 '''
 
 #maybe make one function to check them
@@ -95,11 +97,13 @@ def verify_user():
          print("Invalid email address! ")
          user_email =input("Enter your email: ")
          em_flag=email_ending(user_email)
-    user_pass=input("Enter your password: ")
+    pass_flag=False #set this to ensure dont have unlimited password attempts 
+    while pass_flag==False:
+        user_pass=input("Enter your password: ")
     #they enter username and password check if the email ad the hash of the password are in and match 
-    md5_ver=hashlib.md5()
-    md5_ver.update(user_pass.encode())
-    hex_ver=md5_ver.hexdigest()
+        md5_ver=hashlib.md5() #hash object
+        md5_ver.update(user_pass.encode()) #we update it and send the password the user enter to hash it 
+        hex_ver=md5_ver.hexdigest() #and then we get the hexidigest of that hash
     flag=False #will use this to flag 
     for k, v in db.items(): #somethings wrong here
     #error bec we are iterating over a dictionary that changes sizes
@@ -127,5 +131,3 @@ def verify_user():
             return
 
 user_status()
-
-
