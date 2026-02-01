@@ -6,3 +6,7 @@ Features:
 - Credential verification for login
 - Email format validation with regex
 - Account creation for new users
+
+
+Hashing is the process of converting data into fixed size values (a hash) using a hash function. Even small changes to the input will produce a different hash. This helps us to detect data tampering when we compare the previous and current hashes. Hashing is commonly used for password storage and data integrity verification. 
+
