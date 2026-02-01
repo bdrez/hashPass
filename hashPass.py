@@ -2,8 +2,10 @@ import hashlib
 from collections import defaultdict
 from regexRegulator import email_ending
 '''
- take in the username and pasword then hash the password to store for
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
 '''
 
 #maybe make one function to check them
@@ -11,7 +13,8 @@ first time user and then ask the user to enter the username and password and dou
 
 #create out dict that we will use to store email/password
 db=defaultdict(str)
-db={'b@gmail.com': '202cb962ac59075b964b07152d234b70' }#test case
+db={'b@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' }#test case
+#{'b@gmail.com': '202cb962ac59075b964b07152d234b70', 'a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
 
 
 def user_status():
@@ -129,4 +132,3 @@ def verify_user():
             return
 
 user_status()
-
