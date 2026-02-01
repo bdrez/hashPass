@@ -2,8 +2,10 @@ import hashlib
 from collections import defaultdict
 from regexRegulator import email_ending
 '''
- take in the username and pasword then hash the password to store for
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
 '''
 
 #maybe make one function to check them
@@ -57,12 +59,12 @@ def input_new_user():
 
 
 def hashCheck(em, a, b):
-    md5_pass1=hashlib.md5()
-    md5_pass2=hashlib.md5()
-    md5_pass1.update(a.encode()) #we need to encode to convert from string to byte so we can hash
-    md5_pass2.update(b.encode())
-    digest1=md5_pass1.hexdigest()
-    digest2=md5_pass2.hexdigest()
+    sha_pass1=hashlib.sha256()
+    sha_pass2=hashlib.sha256()
+    sha_pass1.update(a.encode()) #we need to encode to convert from string to byte so we can hash
+    sha_pass2.update(b.encode())
+    digest1=sha_pass1.hexdigest()
+    digest2=sha_pass2.hexdigest()
     if digest1==digest2:
         #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
         if em not in db:
@@ -99,9 +101,9 @@ def verify_user():
     while pass_flag==False:
         user_pass=input("Enter your password: ")
     #they enter username and password check if the email ad the hash of the password are in and match 
-        md5_ver=hashlib.md5() #hash object
-        md5_ver.update(user_pass.encode()) #we update it and send the password the user enter to hash it 
-        hex_ver=md5_ver.hexdigest() #and then we get the hexidigest of that hash
+        sha_ver=hashlib.sha256() #hash object
+        sha_ver.update(user_pass.encode()) #we update it and send the password the user enter to hash it 
+        hex_ver=sha_ver.hexdigest() #and then we get the hexidigest of that hash
     flag=False #will use this to flag 
     for k, v in db.items(): #somethings wrong here
     #error bec we are iterating over a dictionary that changes sizes
@@ -129,4 +131,3 @@ def verify_user():
             return
 
 user_status()
-
