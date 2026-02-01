@@ -15,4 +15,5 @@ One common hashing algorithm is **MD5 (Message Digest Algorithm 5)**, which gene
 A stronger and more secure algorithm is **SHA256 (Secure Hash Algorithm)**, which generates a 256-bit hash value. The longer hash digest increases security and makes it much harder to produce collisions, enhancing the overall strength of the hash.  
 
 To illustrate the differnece bellow i pasted my test case dictionary. The first value used MD5 algorithm and the second used SHA256.
+
 db={'b@gmail.com': '202cb962ac59075b964b07152d234b70', 'a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
