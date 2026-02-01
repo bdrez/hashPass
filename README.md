@@ -16,4 +16,4 @@ A stronger and more secure algorithm is **SHA256 (Secure Hash Algorithm)**, whic
 
 To illustrate the differnece bellow i pasted my test case dictionary. The first value used MD5 algorithm and the second used SHA256.
 
-db={'b@gmail.com': '202cb962ac59075b964b07152d234b70', 'a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
+db={'b@gmail.com': '202cb962ac59075b964b07152d234b70','a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
