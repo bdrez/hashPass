@@ -127,8 +127,8 @@ def verify_user():
                 #here ask again for password and check password with 
                     #flag=True
                     
-            print("Too many log in attempts!")
-            print("Bye, bye!")
-            return
+    print("Too many log in attempts!")
+    print("Bye, bye!")
+    return
             
 user_status()
