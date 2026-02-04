@@ -90,43 +90,45 @@ def hashCheck(em, a, b):
 def verify_user():
     user_email =input("enter your email ")
     login_atempt=5
+    #flag=False #will use this to flag 
     em_flag=False
     em_flag=email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
     while em_flag==False:
          print("Invalid email address ")
          user_email =input("enter your email ")
          em_flag=email_ending(user_email)
-    user_pass=input("enter your password ")
-    #they enter username and password check if the email and the hash of the password are in and match 
-    sha_ver=hashlib.sha256()
-    sha_ver.update(user_pass.encode())
-    hex_ver=sha_ver.hexdigest()
-    flag=False #will use this to flag 
-    for k, v in db.items(): #somethings wrong here
-        if k==user_email and v==hex_ver:
-            print("user logged in successful")
-            flag=True
-        if k==user_email and v!=hex_ver:
-            if login_atempt>0:
-                login_atempt-1
-                print("Password incorrect.")
-                #here ask again for password and check password with 
-                flag=True
-                #input_new_user() #maybe make a new one so doesnt ask twice 
-                #why am i doing this here
-            else:
-                print("Too many log in attempts!")
-                print("Bye, bye!")
-                return
-    if flag==False:
-        print("User not found in system.")
-        resp=input("Press y to create and account. Press n to exit program.")
-        while resp[0].lower()!='y' and resp[0].lower()!='n':
-            resp=input("Invalid response. Enter yes or no.")
-        if resp[0].lower()=='y' :
-            input_new_user()
-        else :
-            print("bye bye")
-            return
 
+    while login_atempt>0: #still have tries left 
+        user_pass=input("enter your password ")
+    #they enter username and password check if the email and the hash of the password are in and match 
+        sha_ver=hashlib.sha256()
+        sha_ver.update(user_pass.encode())
+        hex_ver=sha_ver.hexdigest()
+        #check if the user exists outside the loop 
+        if user_email not in db:
+            print("User not found in system")
+            resp=input("Press y to create and account. Press n to exit program.")
+            while resp[0].lower()!='y' and resp[0].lower()!='n':
+                resp=input("Invalid response. Enter yes or no.")
+            if resp[0].lower()=='y' :
+                input_new_user()
+            else :
+                print("bye bye")
+                return
+        #now that we know it exists we dont have to loop through dictionary
+        #we can just check if thats the value
+            if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
+                print("user logged in successful")
+                return
+            elif db[user_email]!=hex_ver:
+                if login_atempt>0:
+                    login_atempt-=1
+                    print("Password incorrect.")
+                #here ask again for password and check password with 
+                    #flag=True
+                    if login_atempt<0:
+                        print("Too many log in attempts!")
+                        print("Bye, bye!")
+                        return
 user_status()
+
