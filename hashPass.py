@@ -117,18 +117,18 @@ def verify_user():
                 return
         #now that we know it exists we dont have to loop through dictionary
         #we can just check if thats the value
-            if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
-                print("user logged in successful")
-                return
-            elif db[user_email]!=hex_ver:
-                if login_atempt>0:
-                    login_atempt-=1
-                    print("Password incorrect.")
+        if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
+            print("user logged in successful")
+            return
+        elif db[user_email]!=hex_ver:
+            if login_atempt>0:
+                login_atempt-=1
+                print("Password incorrect.")
                 #here ask again for password and check password with 
                     #flag=True
-                    if login_atempt<0:
-                        print("Too many log in attempts!")
-                        print("Bye, bye!")
-                        return
+                    
+            print("Too many log in attempts!")
+            print("Bye, bye!")
+            return
+            
 user_status()
-
