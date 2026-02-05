@@ -62,6 +62,7 @@ def hashCheck(em, a, b):
     sha_pass2.update(b.encode())
     digest1=sha_pass1.hexdigest()
     digest2=sha_pass2.hexdigest()
+    
     if digest1==digest2:
         #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
         if em not in db:
@@ -96,16 +97,10 @@ def verify_user():
          user_email =input("enter your email ")
          em_flag=email_ending(user_email)
 
-    while login_atempt>0: #still have tries left 
-        user_pass=input("enter your password ")
-    #they enter username and password check if the email and the hash of the password are in and match 
-        sha_ver=hashlib.sha256()
-        sha_ver.update(user_pass.encode())
-        hex_ver=sha_ver.hexdigest()
-        #check if the user exists outside the loop 
-        if user_email not in db:
+    #once we check if its a legal email address we need to even check if it exist before we ask for password
+    if user_email not in db:
             print("User not found in system")
-            resp=input("Press y to create and account. Press n to exit program.")
+            resp=input("Press y to create and account. Press n to exit program: ")
             while resp[0].lower()!='y' and resp[0].lower()!='n':
                 resp=input("Invalid response. Enter yes or no.")
             if resp[0].lower()=='y' :
@@ -113,7 +108,13 @@ def verify_user():
             else :
                 print("bye bye")
                 return
-        #now that we know it exists we dont have to loop through dictionary
+    while login_atempt>0: #still have tries left 
+        user_pass=input("enter your password ")
+    #they enter username and password check if the email and the hash of the password are in and match 
+        sha_ver=hashlib.sha256()
+        sha_ver.update(user_pass.encode())
+        hex_ver=sha_ver.hexdigest()
+        #now that we know the user exists we dont have to loop through dictionary
         #we can just check if thats the value
         if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
             print("user logged in successful")
@@ -128,6 +129,5 @@ def verify_user():
     print("Too many log in attempts!")
     print("Bye, bye!")
     return
-            
-user_status()
 
+user_status()
