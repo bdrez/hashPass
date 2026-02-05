@@ -118,6 +118,7 @@ def verify_user():
             print("user logged in successful")
             return
         elif db[user_email]!=hex_ver:
+            login_attempt -= 1
             print("Password incorrect.")
                     
     print("Too many log in attempts!")
@@ -125,4 +126,5 @@ def verify_user():
     return
 
 user_status()
+
 
