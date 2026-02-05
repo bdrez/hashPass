@@ -1,8 +1,10 @@
 import hashlib
 from regexRegulator import email_ending
 '''
- take in the username and pasword then hash the password to store for
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
 '''
 
 #maybe make one function to check them
@@ -118,15 +120,10 @@ def verify_user():
             print("user logged in successful")
             return
         elif db[user_email]!=hex_ver:
-            if login_atempt>0:
-                login_atempt-=1
-                print("Password incorrect.")
-                #here ask again for password and check password with 
-                    #flag=True
+            print("Password incorrect.")
                     
     print("Too many log in attempts!")
     print("Bye, bye!")
     return
 
 user_status()
-
