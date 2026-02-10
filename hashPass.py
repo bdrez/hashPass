@@ -1,11 +1,8 @@
 import hashlib
 from regexRegulator import email_ending
 import getpass
-'''
-use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
+''' take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
-so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
-check then once in system user can enter infroamtion check if the hash they enter matches and log in
 '''
 
 #maybe make one function to check them
@@ -130,3 +127,4 @@ def verify_user():
     return
 
 user_status()
+
