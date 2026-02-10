@@ -1,8 +1,11 @@
 import hashlib
 from regexRegulator import email_ending
+import getpass
 '''
-take in the username and pasword then hash the password to store for
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
 '''
 
 #maybe make one function to check them
@@ -48,8 +51,10 @@ def input_new_user():
         else:
             print("Bye Bye!")
             return 
-    user_pass=input("Enter your password: ")
-    double_pass=input("Please enter your password again to verify: ")
+    user_pass = getpass.getpass("Enter Password: ")
+    #user_pass=input("Enter your password: ")
+    double_pass = getpass.getpass("Password: ")
+    #double_pass=input("Please enter your password again to verify: ")
     hashCheck(user_email, user_pass, double_pass)
 
 
@@ -78,11 +83,10 @@ def hashCheck(em, a, b):
                 print("Bye Bye!")
                 # only be used inside of a loop break  
                 return 
-
     else:
         print("Password does not match!") 
         input_new_user() #go back to allow them to enter new information?
-    #loop back to reenter password?
+    #fix here
 
 def verify_user():
     user_email =input("enter your email ")
@@ -126,6 +130,3 @@ def verify_user():
     return
 
 user_status()
-
-
-
