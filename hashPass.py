@@ -2,8 +2,10 @@ import hashlib
 from regexRegulator import email_ending
 import getpass
 '''
- take in the username and pasword then hash the password to store for
+use a struct or a dict with key values maybe take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
+so enter a user name and store enter a password hash and store hash ask to double check password and hash and double 
+check then once in system user can enter infroamtion check if the hash they enter matches and log in
 '''
 
 #maybe make one function to check them
@@ -53,38 +55,38 @@ def input_new_user():
     #user_pass=input("Enter your password: ")
     double_pass = getpass.getpass("Password: ")
     #double_pass=input("Please enter your password again to verify: ")
-    hashCheck(user_email, user_pass, double_pass)
+    #we are going to check if the password match before we pass it on and hash them
+    #checking the plain text veirison
+    while user_pass!=double_pass:
+        print("Password does not match!")
+        user_pass = getpass.getpass("Enter Password: ")
+        double_pass = getpass.getpass("Password: ")
+
+    register_User(user_email, user_pass)
 
 
-def hashCheck(em, a, b):
-    sha_pass1=hashlib.sha256()
-    sha_pass2=hashlib.sha256()
-    sha_pass1.update(a.encode()) #we need to encode to convert from string to byte so we can hash
-    sha_pass2.update(b.encode())
-    digest1=sha_pass1.hexdigest()
-    digest2=sha_pass2.hexdigest()
-    
-    if digest1==digest2:
-        #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
-        if em not in db:
-            db[em]=digest1
-            print("User entered into date base.")
-            print(db) #iterate over it to print better 
+def register_User(em, a):
+    sha_pass=hashlib.sha256()
+    sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
+    digest=sha_pass.hexdigest()
+   
+    #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
+    if em not in db:
+        db[em]=digest
+        print("User entered into date base.")
+        print(db) #iterate over it to print better 
             #now give them the opportunity to log in 
-            resp=input("Would you like to log in? Enter yes or no: ")
-            while resp[0].lower()!='y' and resp[0].lower()!='n':
-                print("Invalid response. Enter yes to log in and no to leave: ")
-                resp=input("Are you a new user? ")
-            if resp[0].lower()=='y' :
-                verify_user()
-            else:
-                print("Bye Bye!")
-                # only be used inside of a loop break  
-                return 
-    else:
-        print("Password does not match!") 
-        input_new_user() #go back to allow them to enter new information?
-    #fix here
+        resp=input("Would you like to log in? Enter yes or no: ")
+        while resp[0].lower()!='y' and resp[0].lower()!='n':
+            print("Invalid response. Enter yes to log in and no to leave: ")
+            resp=input("Are you a new user? ")
+        if resp[0].lower()=='y' :
+            verify_user()
+        else:
+            print("Bye Bye!")
+            # only be used inside of a loop break  
+            return 
+  
 
 def verify_user():
     user_email =input("enter your email ")
@@ -128,4 +130,3 @@ def verify_user():
     return
 
 user_status()
-
