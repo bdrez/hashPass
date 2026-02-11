@@ -14,11 +14,16 @@ db={'b@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a2
 def user_status():
     #give a menu option 
     #show welcoming message and menu 
-    print("Welcome! Enter the number to chose an option: \n")
-    resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
-    while resp!=1 & resp!=2 & resp!=3:
-        print('Invalid response please enter a number! ')
+    
+    while True:
+        print("Welcome! Enter the number to chose an option: \n")
         resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
+        if resp==1 or resp==2 or resp==3:
+            #valid response break out 
+            break 
+        else:
+            print('Invalid response please enter a number! ')
+            resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
 
     if resp==1:
         input_new_user()
@@ -29,6 +34,7 @@ def user_status():
         return()
     else:
         print("Invalid response")
+        #should not get here
 
     #here we will see if its a first time user and were storing the data or if its an old user logging in 
     #maybe do something abt if they enter nonsense that doesnt start with y or n
