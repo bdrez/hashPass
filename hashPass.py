@@ -16,6 +16,9 @@ def user_status():
     #show welcoming message and menu 
     print("Welcome! Enter the number to chose an option: \n")
     resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
+    while resp!=1 & resp!=2 & resp!=3:
+        print('Invalid response please enter a number! ')
+        resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
 
     if resp==1:
         input_new_user()
