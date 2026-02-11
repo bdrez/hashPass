@@ -89,6 +89,7 @@ def register_User(em, a):
         else:
             print("Bye Bye!")
             # only be used inside of a loop break  
+            
             return 
   
 
@@ -104,7 +105,8 @@ def verify_user():
 
     #once we check if its a legal email address we need to even check if it exist before we ask for password
     if user_email not in db:
-            print("User not found in system")
+            print("Invalid login!")
+            #dont tell them what the issue is - more secure
             resp=input("Press y to create and account. Press n to exit program: ")
             while resp[0].lower()!='y' and resp[0].lower()!='n':
                 resp=input("Invalid response. Enter yes or no.")
