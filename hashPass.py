@@ -35,21 +35,6 @@ def user_status():
     else:
         print("Invalid response")
         #should not get here
-
-    #here we will see if its a first time user and were storing the data or if its an old user logging in 
-    #maybe do something abt if they enter nonsense that doesnt start with y or n
-    #resp=input("Are you a new user? Enter yes or no: ")
-    while resp[0].lower()!='y' and resp[0].lower()!='n':
-            resp=input("Invalid response. Enter yes for new user or no to log into an existing account: ")
-            #resp=input("Are you a new user? ")
-    if resp[0].lower()=='y' :
-        #since were converting the response to .lower will be good no matter if they put upper or lower so only check once
-        input_new_user()
-    else :
-        #can do else bec at the top we made sure only two possible answers here 
-        verify_user()
-        #OKAY THIS WORKS
-        #print('input checking function')
        
 
 def input_new_user():
