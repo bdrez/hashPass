@@ -9,13 +9,10 @@ first time user and then ask the user to enter the username and password and dou
 #create out dict that we will use to store email/password
 db={'b@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' }#test case
 #{'b@gmail.com': '202cb962ac59075b964b07152d234b70', 'a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
-welcome_message=1
+print("Welcome!")
 
 def user_status():
-    global welcome_message
-    if  welcome_message>0:
-        print("Welcome!")
-        welcome_message-=1
+    
     #give a menu option 
     #show welcoming message and menu 
     
