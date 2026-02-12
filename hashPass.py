@@ -15,22 +15,29 @@ def user_status():
     #give a menu option 
     #show welcoming message and menu 
     
-    while True:
+    flag=True
+    while flag:
         print("Welcome! Enter the number to chose an option: \n")
         resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
         if resp==1 or resp==2 or resp==3:
-            #valid response break out 
+            #valid response break out
+            flag=False 
             break 
         else:
             print('Invalid response please enter a number! ')
             resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
+    take_Func(resp)
 
+def take_Func(resp):
     if resp==1:
         input_new_user()
+        user_status()
     elif resp==2:
         verify_user()
+        user_status()
     elif resp==3:
         print("Bye, bye!")
+        user_status()
         return()
     else:
         print("Invalid response")
