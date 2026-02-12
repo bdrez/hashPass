@@ -30,9 +30,9 @@ def user_status():
         else:
             print('Invalid response please enter a number! ')
             resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
-    take_Func(resp)
+    menu_Choice(resp)
 
-def take_Func(resp):
+def menu_Choice(resp):
     if resp==1:
         input_new_user()
         user_status()
