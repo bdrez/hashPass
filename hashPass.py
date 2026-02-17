@@ -18,27 +18,27 @@ def user_status():
     
     flag=True
     while flag:
-        print("Enter the number to chose an option: \n")
-        resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
-        if resp==1 or resp==2 or resp==3:
+        print("Enter the number to choose an option: \n")
+        resp=input("1) Create account \n2) Login  \n3) Exit\n")
+        if resp=="1" or resp=="2" or resp=="3":
             #valid response break out
             break 
         else:
             print('Invalid response please enter a number! ')
-            resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
+            resp=input("1) Create account \n2) Login  \n3) Exit\n")
             #flag=False 
             #should we do this here
     
-    #menu_Choice(resp)
+    #menu_choice(resp)
     if flag==True:
-        menu_Choice(resp)
+        menu_choice(resp)
 
-def menu_Choice(resp):
-    if resp==1:
+def menu_choice(resp):
+    if resp=="1":
         input_new_user()
-    elif resp==2:
+    elif resp=="2":
         verify_user()
-    elif resp==3:
+    elif resp=="3":
         print("Bye, bye!")
         return()
     else:
@@ -87,7 +87,7 @@ def register_User(em, a):
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
         db[em]=digest
-        print("User entered into date base.")
+        print("User entered into datebase.")
         print(db) #iterate over it to print better 
             #now give them the opportunity to log in 
         resp=input("Would you like to log in? Enter yes or no: ")
@@ -105,7 +105,7 @@ def register_User(em, a):
 
 def verify_user():
     user_email =input("enter your email ")
-    login_atempt=5
+    login_attempt=5
     em_flag=False
     em_flag=email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
     while em_flag==False:
@@ -125,7 +125,7 @@ def verify_user():
             else :
                 print("bye bye")
                 return
-    while login_atempt>0: #still have tries left 
+    while login_attempt>0: #still have tries left 
         user_pass=getpass.getpass("enter your password ")
     #they enter username and password check if the email and the hash of the password are in and match 
         sha_ver=hashlib.sha256()
@@ -137,7 +137,7 @@ def verify_user():
             print("user logged in successful")
             return
         elif db[user_email]!=hex_ver:
-            login_atempt-=1
+            login_attempt-=1
             print("Password incorrect.")
                     
     print("Too many log in attempts!")
