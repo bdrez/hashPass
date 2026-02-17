@@ -27,15 +27,15 @@ def user_status():
         else:
             print('Invalid response please enter a number! ')
             resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
-    menu_Choice(resp)
+    #menu_Choice(resp)
+    if flag==False:
+        menu_Choice(resp)
 
 def menu_Choice(resp):
     if resp==1:
         input_new_user()
-        user_status()
     elif resp==2:
         verify_user()
-        user_status()
     elif resp==3:
         print("Bye, bye!")
         return()
