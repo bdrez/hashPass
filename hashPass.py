@@ -59,6 +59,7 @@ def input_new_user():
                 print("Invalid response. Enter yes to log in and no to leave: ")
         if resp[0].lower()=='y' :
             verify_user()
+            return #do this to get rid of bug if they press yes new account but enter exisiting email
         else:
             print("Bye Bye!")
             return 
