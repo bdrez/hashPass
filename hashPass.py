@@ -12,26 +12,24 @@ db={'b@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a2
 print("Welcome!")
 
 def user_status():
-    
     #give a menu option 
     #show welcoming message and menu 
     
-    flag=True
-    while flag:
+    
+    while True:
         print("Enter the number to choose an option: \n")
         resp=input("1) Create account \n2) Login  \n3) Exit\n")
         if resp=="1" or resp=="2" or resp=="3":
             #valid response break out
-            break 
+            out=menu_choice(resp)
+            if out==False: #we get from choosing option 3
+                break
         else:
             print('Invalid response please enter a number! ')
             resp=input("1) Create account \n2) Login  \n3) Exit\n")
             #flag=False 
-            #should we do this here
     
     #menu_choice(resp)
-    if flag==True:
-        menu_choice(resp)
 
 def menu_choice(resp):
     if resp=="1":
@@ -40,7 +38,7 @@ def menu_choice(resp):
         verify_user()
     elif resp=="3":
         print("Bye, bye!")
-        return()
+        return False
     else:
         print("Invalid response")
         #should not get here
@@ -99,7 +97,6 @@ def register_User(em, a):
         else:
             print("Bye Bye!")
             # only be used inside of a loop break  
-            
             return 
   
 
