@@ -22,13 +22,15 @@ def user_status():
         resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
         if resp==1 or resp==2 or resp==3:
             #valid response break out
-            flag=False 
             break 
         else:
             print('Invalid response please enter a number! ')
             resp=int(input("1) Create account \n2) Login  \n3) Exit\n"))
+            #flag=False 
+            #should we do this here
+    
     #menu_Choice(resp)
-    if flag==False:
+    if flag==True:
         menu_Choice(resp)
 
 def menu_Choice(resp):
@@ -56,7 +58,7 @@ def input_new_user():
     if user_email in db:
         resp=input('Account already created. Enter yes to sign in and no to exit: ')
         while resp[0].lower()!='y' and resp[0].lower()!='n':
-                print("Invalid response. Enter yes to log in and no to leave: ")
+                resp=input("Invalid response. Enter yes to log in and no to leave: ")
         if resp[0].lower()=='y' :
             verify_user()
             return #do this to get rid of bug if they press yes new account but enter exisiting email
