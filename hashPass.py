@@ -17,7 +17,7 @@ def user_status():
     
     
     while True:
-        print("Enter the number to choose an option: \n")
+        print("\nEnter the number to choose an option: \n")
         resp=input("1) Create account \n2) Login  \n3) Exit\n")
         if resp=="1" or resp=="2" or resp=="3":
             #valid response break out
@@ -141,4 +141,5 @@ def verify_user():
     return
 
 user_status()
+
 
