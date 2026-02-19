@@ -54,14 +54,17 @@ def input_new_user():
     #do something to make sure they cannot enter nothing-for both 
     if user_email in db:
         resp=input('Account already created. Enter yes to sign in and no to exit: ')
-        while resp[0].lower()!='y' and resp[0].lower()!='n':
-                resp=input("Invalid response. Enter yes to log in and no to leave: ")
-        if resp[0].lower()=='y' :
-            verify_user()
-            return #do this to get rid of bug if they press yes new account but enter exisiting email
-        else:
-            print("Bye Bye!")
-            return 
+        try:
+            while resp[0].lower()!='y' and resp[0].lower()!='n':
+                    resp=input("Invalid response. Enter yes to log in and no to leave: ")
+            if resp[0].lower()=='y' :
+                verify_user()
+                return #do this to get rid of bug if they press yes new account but enter exisiting email
+            else:
+                print("Bye Bye!")
+                return 
+        except IndexError:
+            resp=input("Invalid response enter yes or no.")
     user_pass = getpass.getpass("Enter Password: ")
     #user_pass=input("Enter your password: ")
     double_pass = getpass.getpass("Password: ")
@@ -85,7 +88,7 @@ def register_User(em, a):
     if em not in db:
         db[em]=digest
         print("User entered into datebase.")
-        print(db) #iterate over it to print better 
+        #print(db) print db for testing
             #now give them the opportunity to log in 
         resp=input("Would you like to log in? Enter yes or no: ")
         while resp[0].lower()!='y' and resp[0].lower()!='n':
@@ -141,5 +144,3 @@ def verify_user():
     return
 
 user_status()
-
-
