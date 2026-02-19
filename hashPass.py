@@ -106,7 +106,6 @@ def register_User(em, a):
 def verify_user():
     user_email =input("enter your email ")
     login_attempt=5
-    em_flag=False
     em_flag=email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
     while em_flag==False:
          print("Invalid email address ")
