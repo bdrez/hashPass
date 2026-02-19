@@ -46,7 +46,6 @@ def menu_choice(resp):
 
 def input_new_user():
     user_email =input("Enter your email: ") 
-    em_flag=False #flag set to check the email
     em_flag=email_ending(user_email)#REGEX IMPORTED FUNCTION FROM REGEXREGULATOR
     while em_flag==False:
         print("Invalid email address! ")
@@ -142,3 +141,4 @@ def verify_user():
     return
 
 user_status()
+
