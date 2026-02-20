@@ -91,7 +91,8 @@ def register_User(em,a):
         #print(db) print db for testing
             #now give them the opportunity to log in 
         resp=input("Would you like to log in? Enter yes or no: ")
-        while resp[0].lower()!='y' and resp[0].lower()!='n':
+        #so were gonna check if the string exist if "" aka press enter the string is False
+        while not resp or resp[0].lower() not in ("y", "n"): #so here where checking if nots true (false/doesnt exist) or didnt enter Y/N
             print("Invalid response. Enter yes to log in and no to leave: ")
             resp=input("Are you a new user? ")
         if resp[0].lower()=='y' :
@@ -115,7 +116,7 @@ def verify_user():
             print("Invalid login!")
             #dont tell them what the issue is - more secure
             resp=input("Press y to create and account. Press n to exit program: ")
-            while resp[0].lower()!='y' and resp[0].lower()!='n':
+            while not resp or resp[0].lower() not in ("y", "n"):
                 resp=input("Invalid response. Enter yes or no.")
             if resp[0].lower()=='y' :
                 input_new_user()
