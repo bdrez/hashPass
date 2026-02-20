@@ -14,8 +14,6 @@ print("Welcome!")
 def user_status():
     #give a menu option 
     #show welcoming message and menu 
-    
-    
     while True:
         print("\nEnter the number to choose an option: \n")
         resp=input("1) Create account \n2) Login  \n3) Exit\n")
@@ -27,9 +25,6 @@ def user_status():
         else:
             print('Invalid response please enter a number! ')
             resp=input("1) Create account \n2) Login  \n3) Exit\n")
-            #flag=False 
-    
-    #menu_choice(resp)
 
 def menu_choice(resp):
     if resp=="1":
@@ -43,6 +38,11 @@ def menu_choice(resp):
         print("Invalid response")
         #should not get here
        
+def hasher(a): #create a fucntion to hash
+    sha_pass=hashlib.sha256()
+    sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
+    digest=sha_pass.hexdigest()
+    return digest
 
 def input_new_user():
     user_email =input("Enter your email: ") 
@@ -80,10 +80,9 @@ def input_new_user():
     register_User(user_email, user_pass)
 
 
-def register_User(em, a):
-    sha_pass=hashlib.sha256()
-    sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
-    digest=sha_pass.hexdigest()
+def register_User(em,a):
+    #get the hash of user_pass/a
+    digest=hasher(a)
    
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
@@ -100,8 +99,7 @@ def register_User(em, a):
         else:
             print("Bye Bye!")
             # only be used inside of a loop break  
-            return 
-  
+            return  
 
 def verify_user():
     user_email =input("enter your email ")
@@ -127,9 +125,8 @@ def verify_user():
     while login_attempt>0: #still have tries left 
         user_pass=getpass.getpass("enter your password ")
     #they enter username and password check if the email and the hash of the password are in and match 
-        sha_ver=hashlib.sha256()
-        sha_ver.update(user_pass.encode())
-        hex_ver=sha_ver.hexdigest()
+        #go get the hash of user_pass
+        hex_ver=hasher(user_pass)
         #now that we know the user exists we dont have to loop through dictionary
         #we can just check if thats the value
         if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
