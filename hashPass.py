@@ -55,17 +55,14 @@ def input_new_user():
     if user_email in db:
         resp=input('Account already created. Enter yes to sign in and no to exit: ')
         while True:
-            try:
-                while resp[0].lower()!='y' and resp[0].lower()!='n':
-                        resp=input("Invalid response. Enter yes to log in and no to leave: ")
+            while not resp or resp[0].lower not in ("y","n"):
+                resp=input("Invalid response. Enter yes to log in and no to leave: ")
                 if resp[0].lower()=='y' :
                     verify_user()
                     return #do this to get rid of bug if they press yes new account but enter exisiting email
                 else:
                     print("Bye Bye!")
                     return 
-            except IndexError:
-                resp=input("Invalid response enter yes or no.")
     user_pass = getpass.getpass("Enter Password: ")
     #user_pass=input("Enter your password: ")
     double_pass = getpass.getpass("Password: ")
