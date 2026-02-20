@@ -24,7 +24,6 @@ def user_status():
                 break
         else:
             print('Invalid response please enter a number! ')
-            resp=input("1) Create account \n2) Login  \n3) Exit\n")
 
 def menu_choice(resp):
     if resp=="1":
