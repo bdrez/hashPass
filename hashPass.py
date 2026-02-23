@@ -54,7 +54,7 @@ def input_new_user():
     if user_email in db:
         resp=input('Account already created. Enter yes to sign in and no to exit: ')
         while True:
-            while not resp or resp[0].lower not in ("y","n"):
+            while not resp or resp[0].lower() not in ("y","n"):
                 resp=input("Invalid response. Enter yes to log in and no to leave: ")
                 if resp[0].lower()=='y' :
                     verify_user()
@@ -138,3 +138,4 @@ def verify_user():
     return
 
 user_status()
+
