@@ -1,6 +1,6 @@
 import hashlib
-from regexRegulator import email_ending
 import getpass
+from regexRegulator import email_ending
 '''
  take in the username and pasword then hash the password to store for
 first time user and then ask the user to enter the username and password and double check with the hash
@@ -24,6 +24,7 @@ def user_status():
                 break
         else:
             print('Invalid response please enter a number! ')
+            
 
 def menu_choice(resp):
     if resp=="1":
@@ -36,7 +37,7 @@ def menu_choice(resp):
     else:
         print("Invalid response")
         #should not get here
-       
+
 def hasher(a): #create a fucntion to hash
     sha_pass=hashlib.sha256()
     sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
@@ -53,15 +54,15 @@ def input_new_user():
     #do something to make sure they cannot enter nothing-for both 
     if user_email in db:
         resp=input('Account already created. Enter yes to sign in and no to exit: ')
-        
-        while not resp or resp[0].lower() not in ("y","n"):
-            resp=input("Invalid response. Enter yes to log in and no to leave: ")
-            if resp[0].lower()=='y' :
-                verify_user()
-                return #do this to get rid of bug if they press yes new account but enter exisiting email
-            else:
-                print("Bye Bye!")
-                return 
+        while True:
+            while not resp or resp[0].lower() not in ("y","n"):
+                resp=input("Invalid response. Enter yes to log in and no to leave: ")
+                if resp[0].lower()=='y' :
+                    verify_user()
+                    return #do this to get rid of bug if they press yes new account but enter exisiting email
+                else:
+                    print("Bye Bye!")
+                    return 
     user_pass = getpass.getpass("Enter Password: ")
     #user_pass=input("Enter your password: ")
     double_pass = getpass.getpass("Password: ")
@@ -71,7 +72,7 @@ def input_new_user():
     while user_pass!=double_pass:
         print("Password does not match!")
         user_pass = getpass.getpass("Enter Password: ")
-        double_pass = getpass.getpass("Password: ")
+        double_pass = getpass.getpass("Confirm Password: ")
 
     register_User(user_email, user_pass)
 
@@ -79,11 +80,11 @@ def input_new_user():
 def register_User(em,a):
     #get the hash of user_pass/a
     digest=hasher(a)
-   
+
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
         db[em]=digest
-        print("User entered into datebase.")
+        print("User entered into database.")
         #print(db) print db for testing
             #now give them the opportunity to log in 
         resp=input("Would you like to log in? Enter yes or no: ")
@@ -111,7 +112,7 @@ def verify_user():
     if user_email not in db:
             print("Invalid login!")
             #dont tell them what the issue is - more secure
-            resp=input("Press y to create and account. Press n to exit program: ")
+            resp=input("Press y to create an account. Press n to exit program: ")
             while not resp or resp[0].lower() not in ("y", "n"):
                 resp=input("Invalid response. Enter yes or no.")
             if resp[0].lower()=='y' :
@@ -129,10 +130,11 @@ def verify_user():
         if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
             print("user logged in successful")
             return
-        elif db[user_email]!=hex_ver:
+        else:
+         #db[user_email]!=hex_ver:
             login_attempt-=1
             print("Password incorrect.")
-                    
+
     print("Too many log in attempts!")
     print("Bye, bye!")
     return
