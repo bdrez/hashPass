@@ -83,6 +83,7 @@ def register_User(em,a):
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
         db[em]=digest
+        #OPEN FILE AND WRITE TO OUR DB
         print("User entered into database.")
         #print(db) print db for testing
             #now give them the opportunity to log in 
@@ -137,5 +138,6 @@ def verify_user():
     print("Too many log in attempts!")
     print("Bye!")
     return
+
 
 user_status()
