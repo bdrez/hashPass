@@ -32,7 +32,7 @@ def menu_choice(resp):
     elif resp=="2":
         verify_user()
     elif resp=="3":
-        print("Bye, bye!")
+        print("Bye!")
         return False
     else:
         print("Invalid response")
@@ -54,15 +54,14 @@ def input_new_user():
     #do something to make sure they cannot enter nothing-for both 
     if user_email in db:
         resp=input('Account already created. Enter yes to sign in and no to exit: ')
-        while True:
-            while not resp or resp[0].lower() not in ("y","n"):
-                resp=input("Invalid response. Enter yes to log in and no to leave: ")
-                if resp[0].lower()=='y' :
-                    verify_user()
-                    return #do this to get rid of bug if they press yes new account but enter exisiting email
-                else:
-                    print("Bye Bye!")
-                    return 
+        while not resp or resp[0].lower() not in ("y","n"):
+            resp=input("Invalid response. Enter yes to log in and no to leave: ")
+            if resp[0].lower()=='y' :
+                verify_user()
+                return #do this to get rid of bug if they press yes new account but enter exisiting email
+            else:
+                print("Bye!")
+                return 
     user_pass = getpass.getpass("Enter Password: ")
     #user_pass=input("Enter your password: ")
     double_pass = getpass.getpass("Password: ")
@@ -95,7 +94,7 @@ def register_User(em,a):
         if resp[0].lower()=='y' :
             verify_user()
         else:
-            print("Bye Bye!")
+            print("Bye!")
             # only be used inside of a loop break  
             return  
 
@@ -118,7 +117,7 @@ def verify_user():
             if resp[0].lower()=='y' :
                 input_new_user()
             else :
-                print("bye bye")
+                print("Bye!")
                 return
     while login_attempt>0: #still have tries left 
         user_pass=getpass.getpass("enter your password ")
@@ -136,7 +135,7 @@ def verify_user():
             print("Password incorrect.")
 
     print("Too many log in attempts!")
-    print("Bye, bye!")
+    print("Bye!")
     return
 
 user_status()
