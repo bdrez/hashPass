@@ -10,6 +10,9 @@ first time user and then ask the user to enter the username and password and dou
 db={'b@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' }#test case
 #{'b@gmail.com': '202cb962ac59075b964b07152d234b70', 'a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
 print("Welcome!")
+#build the dictionary here - open the db file and store it into dictionary so we have o(n) search 
+
+#add password rules, add account lock out timer, add persistent storage, add salt/pbkdf2 
 
 def user_status():
     #give a menu option 
@@ -84,6 +87,13 @@ def register_User(em,a):
     if em not in db:
         db[em]=digest
         #OPEN FILE AND WRITE TO OUR DB
+        #a will append to end of the file (w will overwrite everything)
+        with open ('hashPassdb.txt', "a") as file_object:
+            #we need to write the information in our file/"db" now that we used dictionary and know it odenst exist
+            file_object.write("\nem a")
+
+
+
         print("User entered into database.")
         #print(db) print db for testing
             #now give them the opportunity to log in 
@@ -138,6 +148,5 @@ def verify_user():
     print("Too many log in attempts!")
     print("Bye!")
     return
-
 
 user_status()
