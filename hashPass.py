@@ -11,14 +11,12 @@ db={ }#test case
 #{'b@gmail.com': '202cb962ac59075b964b07152d234b70', 'a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
 print("Welcome!")
 #opening to read it, we dont need to write r just makes it more clear 
-with open ('hashPassdb.txt', "r") as file_object_read:
-    line=file_object_read.read() #read one line at a time
+for line in open('hashPassdb.txt'):
+    #line=file_object_read.readline() #read one line at a time
     #we need to loop to get everything
-    for x in line:
-        em_word,em_hash=line.strip().split() #were striping any access space and splitting by a space
-        db[em_word]=em_hash
-        print("transfer complete")
-    #loop store each part and set as dict and key
+    em_word,em_hash=line.strip().split() #were striping any access space and splitting by a space
+    db[em_word]=em_hash
+print("transfer complete")
 print(db)
 
 #build the dictionary here - open the db file and store it into dictionary so we have o(n) search 
