@@ -12,12 +12,14 @@ db={ }#test case
 print("Welcome!")
 #opening to read it, we dont need to write r just makes it more clear 
 with open ('hashPassdb.txt', "r") as file_object_read:
-    line=file_object_read.readline() #read one line at a time
-    while line>0:
-        em_word,em_hash=line.strip().split(" ") #were striping any access space and splitting by a space
+    line=file_object_read.read() #read one line at a time
+    #we need to loop to get everything
+    for x in line:
+        em_word,em_hash=line.strip().split() #were striping any access space and splitting by a space
         db[em_word]=em_hash
         print("transfer complete")
     #loop store each part and set as dict and key
+print(db)
 
 #build the dictionary here - open the db file and store it into dictionary so we have o(n) search 
 
