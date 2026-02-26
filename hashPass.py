@@ -7,9 +7,18 @@ first time user and then ask the user to enter the username and password and dou
 '''
 
 #create out dict that we will use to store email/password
-db={'b@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3' }#test case
+db={ }#test case
 #{'b@gmail.com': '202cb962ac59075b964b07152d234b70', 'a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
 print("Welcome!")
+#opening to read it, we dont need to write r just makes it more clear 
+with open ('hashPassdb.txt', "r") as file_object_read:
+    line=file_object_read.readline() #read one line at a time
+    while line>0:
+        em_word,em_hash=line.strip().split(" ") #were striping any access space and splitting by a space
+        db[em_word]=em_hash
+        print("transfer complete")
+    #loop store each part and set as dict and key
+
 #build the dictionary here - open the db file and store it into dictionary so we have o(n) search 
 
 #add password rules, add account lock out timer, add persistent storage, add salt/pbkdf2 
@@ -91,9 +100,6 @@ def register_User(em,a):
         with open ('hashPassdb.txt', "a") as file_object:
             #we need to write the information in our file/"db" now that we used dictionary and know it odenst exist
             file_object.write("\n" + em +" "+digest)
-
-
-
         print("User entered into database.")
         #print(db) print db for testing
             #now give them the opportunity to log in 
