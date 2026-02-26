@@ -90,7 +90,7 @@ def register_User(em,a):
         #a will append to end of the file (w will overwrite everything)
         with open ('hashPassdb.txt', "a") as file_object:
             #we need to write the information in our file/"db" now that we used dictionary and know it odenst exist
-            file_object.write("\nem a")
+            file_object.write("\n" + em +" "+digest)
 
 
 
