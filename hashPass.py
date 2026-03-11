@@ -1,5 +1,6 @@
 import hashlib
-import getpass
+import getpass #to block the keys the user enters when typing in a password
+import secrets #to help generate salte
 from regexRegulator import email_ending
 '''
  take in the username and pasword then hash the password to store for
@@ -12,18 +13,18 @@ db={ }#test case
 print("Welcome!")
 #opening to read it, we dont need to write r just makes it more clear 
 for line in open('hashPassdb.txt'):
-    #line=file_object_read.readline() #read one line at a time
     #we need to loop to get everything
     em_word,em_hash=line.strip().split() #were striping any access space and splitting by a space
     db[em_word]=em_hash
 print("transfer complete")
-print(db)
+#print(db)
 
 #build the dictionary here - open the db file and store it into dictionary so we have o(n) search 
 
 #add password rules, add account lock out timer, add persistent storage, add salt/pbkdf2 
 
 def user_status():
+    
     #give a menu option 
     #show welcoming message and menu 
     while True:
@@ -51,10 +52,15 @@ def menu_choice(resp):
         #should not get here
 
 def hasher(a): #create a fucntion to hash
-    sha_pass=hashlib.sha256()
+    sha_pass=pbkdf2()
+    #hashlib.sha256()
     sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
     digest=sha_pass.hexdigest()
     return digest
+
+def salter(): #create a function to add salt to password
+    salt=secrets.token_bytes(16)
+    return salt
 
 def input_new_user():
     user_email =input("Enter your email: ") 
