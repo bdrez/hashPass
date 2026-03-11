@@ -97,6 +97,8 @@ def input_new_user():
 def register_User(em,a):
     #get the hash of user_pass/a
     digest=hasher(a)
+    #get a random salt to make it more secure 
+    salt=salter() 
 
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
@@ -104,8 +106,8 @@ def register_User(em,a):
         #OPEN FILE AND WRITE TO OUR DB
         #a will append to end of the file (w will overwrite everything)
         with open ('hashPassdb.txt', "a") as file_object:
-            #we need to write the information in our file/"db" now that we used dictionary and know it odenst exist
-            file_object.write("\n" + em +" "+digest)
+            #we need to write the information in our file/"db" now that we used dictionary and know it doesnt exist
+            file_object.write("\n" + em +" "+salt+" "+digest)
         print("User entered into database.")
         #print(db) print db for testing
             #now give them the opportunity to log in 
