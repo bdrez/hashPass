@@ -55,10 +55,10 @@ def salter(): #create a function to add salt to password
     salt=secrets.token_bytes(16)
     return salt
 
-def hasher(password): #create a fucntion to hash
+def hasher(password, salt): #create a fucntion to hash
     #hashlib.pbkdf2_hmac(hash_name, password, salt, iterations, dklen=None)
     #we need to encode the password to convert from string to bytes for hashing
-    sha_pass=hashlib.pbkdf2_hmac('sha256', password.encode(), salter(), 100000)
+    sha_pass=hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)
     #hashlib.sha256()
     #sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
     #digest=sha_pass.hexdigest()
@@ -97,10 +97,12 @@ def input_new_user():
 
 
 def register_User(em,a):
+    #get a random salt to make it more secure, we need to keep track of this salt that we use to use 
+    #for the pbkdf2 and to store it in the db so we can access it
+    salt=salter()
     #get the hash of user_pass/a
-    digest=hasher(a) #send the password to hasher - it will call salt
-    #get a random salt to make it more secure 
-    #salt=salter() 
+    digest=hasher(a, salt) #send the password and the salt to the  hasher
+     
 
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
