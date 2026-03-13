@@ -50,18 +50,19 @@ def menu_choice(resp):
     else:
         print("Invalid response")
         #should not get here
-        
+
 def salter(): #create a function to add salt to password
     salt=secrets.token_bytes(16)
     return salt
 
 def hasher(password): #create a fucntion to hash
     #hashlib.pbkdf2_hmac(hash_name, password, salt, iterations, dklen=None)
-    sha_pass=hashlib.pbkdf2_hmac('sha256', password,salter())
+    #we need to encode the password to convert from string to bytes for hashing
+    sha_pass=hashlib.pbkdf2_hmac('sha256', password.encode(), salter(), 100000)
     #hashlib.sha256()
     #sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
     #digest=sha_pass.hexdigest()
-    return digest.nex() #return the hexadecimal verision
+    return sha_pass.hex() #return the hexadecimal verision
 
 def input_new_user():
     user_email =input("Enter your email: ") 
