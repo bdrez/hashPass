@@ -1,6 +1,6 @@
 import hashlib
 import getpass #to block the keys the user enters when typing in a password
-import secrets #to help generate salte
+import secrets #to help generate salt
 from regexRegulator import email_ending
 '''
  take in the username and pasword then hash the password to store for
@@ -162,5 +162,6 @@ def verify_user():
     print("Too many log in attempts!")
     print("Bye!")
     return
+
 
 user_status()
