@@ -50,15 +50,16 @@ def menu_choice(resp):
     else:
         print("Invalid response")
         #should not get here
+        
 def salter(): #create a function to add salt to password
     salt=secrets.token_bytes(16)
     return salt
 
-def hasher(a): #create a fucntion to hash
+def hasher(password): #create a fucntion to hash
     #hashlib.pbkdf2_hmac(hash_name, password, salt, iterations, dklen=None)
-    sha_pass=hashlib.pbkdf2_hmac('sha256',)
+    sha_pass=hashlib.pbkdf2_hmac('sha256', password,salter())
     #hashlib.sha256()
-    sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
+    #sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
     #digest=sha_pass.hexdigest()
     return digest.nex() #return the hexadecimal verision
 
@@ -96,9 +97,9 @@ def input_new_user():
 
 def register_User(em,a):
     #get the hash of user_pass/a
-    digest=hasher(a)
+    digest=hasher(a) #send the password to hasher - it will call salt
     #get a random salt to make it more secure 
-    salt=salter() 
+    #salt=salter() 
 
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
@@ -162,6 +163,5 @@ def verify_user():
     print("Too many log in attempts!")
     print("Bye!")
     return
-
 
 user_status()
