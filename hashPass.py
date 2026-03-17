@@ -14,8 +14,9 @@ print("Welcome!")
 #opening to read it, we dont need to write r just makes it more clear 
 for line in open('hashPassdb.txt'):
     #we need to loop to get everything
-    em_word,em_hash=line.strip().split() #were striping any access space and splitting by a space
-    db[em_word]=em_hash
+    #NEED TO UNPACK MORE WHEN WE ADD THE SALT
+    em_word,em_salt,em_hash=line.strip().split() #were striping any access space and splitting by a space
+    db[em_word]=(em_salt, em_hash)
 print("transfer complete")
 #print(db)
 
@@ -53,12 +54,13 @@ def menu_choice(resp):
 
 def salter(): #create a function to add salt to password
     salt=secrets.token_bytes(16)
+    print("salty")
     return salt
 
 def hasher(password, salt): #create a fucntion to hash
     #hashlib.pbkdf2_hmac(hash_name, password, salt, iterations, dklen=None)
     #we need to encode the password to convert from string to bytes for hashing
-    sha_pass=hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)
+    sha_pass=hashlib.pbkdf2_hmac('sha256', password.decode(), salt.encode(), 100000)
     #hashlib.sha256()
     #sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
     #digest=sha_pass.hexdigest()
