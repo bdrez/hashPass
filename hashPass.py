@@ -14,7 +14,6 @@ print("Welcome!")
 #opening to read it, we dont need to write r just makes it more clear 
 for line in open('hashPassdb.txt'):
     #we need to loop to get everything
-    #NEED TO UNPACK MORE WHEN WE ADD THE SALT
     em_word,em_salt,em_hash=line.strip().split() #were striping any access space and splitting by a space
     db[em_word]=(em_salt, em_hash)
 print("transfer complete")
