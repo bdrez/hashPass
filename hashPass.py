@@ -60,7 +60,7 @@ def salter(): #create a function to add salt to password
 def hasher(password, salt): #create a fucntion to hash
     #hashlib.pbkdf2_hmac(hash_name, password, salt, iterations, dklen=None)
     #we need to encode the password to convert from string to bytes for hashing
-    sha_pass=hashlib.pbkdf2_hmac('sha256', password.decode(), salt.encode(), 100000)
+    sha_pass=hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)
     #hashlib.sha256()
     #sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
     #digest=sha_pass.hexdigest()
@@ -113,7 +113,8 @@ def register_User(em,a):
         #a will append to end of the file (w will overwrite everything)
         with open ('hashPassdb.txt', "a") as file_object:
             #we need to write the information in our file/"db" now that we used dictionary and know it doesnt exist
-            file_object.write("\n" + em +" "+salt+" "+digest)
+            #.hex will convert the byte to a prinatble string
+            file_object.write("\n" + em +" "+salt.hex()+" "+digest)
         print("User entered into database.")
         #print(db) print db for testing
             #now give them the opportunity to log in 
