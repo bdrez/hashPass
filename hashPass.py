@@ -53,7 +53,7 @@ def menu_choice(resp):
 
 def salter(): #create a function to add salt to password
     salt=secrets.token_bytes(16)
-    print("salty")
+    #print("salty")
     return salt
 
 def hasher(password, salt): #create a fucntion to hash
