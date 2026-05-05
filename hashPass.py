@@ -158,7 +158,9 @@ def verify_user():
         #since we have our email as the key in the db and the salt and hash as a tuple we do this
         #we have to encode the salt bec we stored it as a hex string in our dictionary
         #we are getting the inver back to byte
-        hex_ver=hasher(user_pass, db[user_email][0].fromhex())
+        salt_hex=db[user_email][0]
+        salt_byte=bytes.fromhex(salt_hex)
+        hex_ver=hasher(user_pass, salt_byte)
         #now that we know the user exists we dont have to loop through dictionary
         #we can just check if thats the value
         if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
