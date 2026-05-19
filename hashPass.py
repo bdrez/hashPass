@@ -110,8 +110,8 @@ def register_User(em,a):
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
         #we need to pass the salt from previous
-        #we need to make it from bytes to string
-        db[em]= salt.hex(), digest.hex()
+        #we need to make it from bytes to string, we passed digest as hex in hasher
+        db[em]= salt.hex(), digest
         #OPEN FILE AND WRITE TO OUR DB
         #a will append to end of the file (w will overwrite everything)
         with open ('hashPassdb.txt', "a") as file_object:
