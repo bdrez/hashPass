@@ -111,7 +111,7 @@ def register_User(em,a):
     if em not in db:
         #we need to pass the salt from previous
         #we need to make it from bytes to string
-        db[em]=digest.hex(), salt.hex()
+        db[em]= salt.hex(), digest.hex()
         #OPEN FILE AND WRITE TO OUR DB
         #a will append to end of the file (w will overwrite everything)
         with open ('hashPassdb.txt', "a") as file_object:
