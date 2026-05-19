@@ -48,6 +48,7 @@ def menu_choice(resp):
         print("Bye!")
         return False
     else:
+        #need a way to get out of her if they decide 
         print("Invalid response")
         #should not get here
 
@@ -97,6 +98,7 @@ def input_new_user():
     register_User(user_email, user_pass)
 
 
+#passing user email, and user password
 def register_User(em,a):
     #get a random salt to make it more secure, we need to keep track of this salt that we use to use 
     #for the pbkdf2 and to store it in the db so we can access it
@@ -107,7 +109,9 @@ def register_User(em,a):
 
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
-        db[em]=digest
+        #we need to pass the salt from previous
+        #we need to make it from bytes to string
+        db[em]=digest.hex(), salt.hex()
         #OPEN FILE AND WRITE TO OUR DB
         #a will append to end of the file (w will overwrite everything)
         with open ('hashPassdb.txt', "a") as file_object:
