@@ -108,6 +108,11 @@ def register_User(em,a):
      
 
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
+    # okay so we generate a salt , then we take the salt and password to the hash
+    #then we open up the db and we store the salt in hex and the hasher in hex 
+    #so then we to compate we need to take the stored salt with the entered password send that to hasher and see 
+    #if the two match up
+    #
     if em not in db:
         #we need to pass the salt from previous
         #we need to make it from bytes to string, we passed digest as a hash
