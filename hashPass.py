@@ -161,6 +161,8 @@ def verify_user():
                 return
     while login_attempt>0: #still have tries left 
         user_pass=getpass.getpass("enter your password ")
+        #now we take the password they enter and pass along the stored salt to hasher
+        #then we compare if the two are the same
     #they enter username and password check if the email and the hash of the password are in and match 
         #go get the hash of user_pass
         #we need to pass this salt which is the second element in our db
@@ -171,8 +173,15 @@ def verify_user():
         salt_hex=db[user_email][0]
         #we convert the salt back to byte (hex in doc easier to read)
         salt_byte=bytes.fromhex(salt_hex)
-        #were passing out password string and out salt in byte
+        #were passing out password string and our salt in byte to get hashed
         hex_ver=hasher(user_pass, salt_byte)
+        #now we compare if the hash above is equal to the stored has
+        #we are getting the second element of the tuple which is the hash of the salt and password
+        #and we comapre it with the newly generated hash
+        #DO WE NEED TO CHANGE BYTE/HEX
+        if db[user_email][1]==hex_ver:
+            print("user logged in successful")
+            return
         #now that we know the user exists we dont have to loop through dictionary
         #we can just check if thats the value
         if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
