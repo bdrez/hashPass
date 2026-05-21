@@ -110,7 +110,7 @@ def register_User(em,a):
     #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
     if em not in db:
         #we need to pass the salt from previous
-        #we need to make it from bytes to string, we passed digest as hex in hasher
+        #we need to make it from bytes to string, we passed digest as a hash
         db[em]= salt.hex(), digest
         #OPEN FILE AND WRITE TO OUR DB
         #a will append to end of the file (w will overwrite everything)
@@ -162,8 +162,11 @@ def verify_user():
         #since we have our email as the key in the db and the salt and hash as a tuple we do this
         #we have to encode the salt bec we stored it as a hex string in our dictionary
         #we are getting the inver back to byte
+        #getting first element of the tuple
         salt_hex=db[user_email][0]
+        #we convert the salt back to byte (hex in doc easier to read)
         salt_byte=bytes.fromhex(salt_hex)
+        #were passing out password string and out salt in byte
         hex_ver=hasher(user_pass, salt_byte)
         #now that we know the user exists we dont have to loop through dictionary
         #we can just check if thats the value
