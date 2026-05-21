@@ -1,11 +1,8 @@
 import hashlib
 import getpass #to block the keys the user enters when typing in a password
 import secrets #to help generate salt
-from regexRegulator import email_ending
-'''
- take in the username and pasword then hash the password to store for
-first time user and then ask the user to enter the username and password and double check with the hash
-'''
+from regexRegulator import email_ending #import to ensure they enter an email
+
 
 #create out dict that we will use to store email/password
 db={ }#test case
@@ -17,15 +14,12 @@ for line in open('hashPassdb.txt'):
     em_word,em_salt,em_hash=line.strip().split() #were striping any access space and splitting by a space
     db[em_word]=(em_salt, em_hash)
 print("transfer complete")
-#print(db)
 
 #build the dictionary here - open the db file and store it into dictionary so we have o(n) search 
 
-#add password rules, add account lock out timer, add persistent storage, add salt/pbkdf2 
+#add password rules, add account lock out timer, add persistent storage 
 
-def user_status():
-    
-    #give a menu option 
+def user_status(): 
     #show welcoming message and menu 
     while True:
         print("\nEnter the number to choose an option: \n")
@@ -54,16 +48,12 @@ def menu_choice(resp):
 
 def salter(): #create a function to add salt to password
     salt=secrets.token_bytes(16)
-    #print("salty")
     return salt
 
 def hasher(password, salt): #create a fucntion to hash
-    #hashlib.pbkdf2_hmac(hash_name, password, salt, iterations, dklen=None)
     #we need to encode the password to convert from string to bytes for hashing
     sha_pass=hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)
-    #hashlib.sha256()
-    #sha_pass.update(a.encode()) #we need to encode to convert from string to byte so we can hash
-    #digest=sha_pass.hexdigest()
+    #we need to encode to convert from string to byte so we can hash
     return sha_pass.hex() #return the hexadecimal verision
 
 def input_new_user():
@@ -85,11 +75,8 @@ def input_new_user():
             print("Bye!")
             return 
     user_pass = getpass.getpass("Enter Password: ")
-    #user_pass=input("Enter your password: ")
     double_pass = getpass.getpass("Password: ")
-    #double_pass=input("Please enter your password again to verify: ")
-    #we are going to check if the password match before we pass it on and hash them
-    #checking the plain text veirison
+    #check if the password (plain text verision) match before we pass it on and hash them
     while user_pass!=double_pass:
         print("Password does not match!")
         user_pass = getpass.getpass("Enter Password: ")
@@ -100,19 +87,19 @@ def input_new_user():
 
 #passing user email, and user password
 def register_User(em,a):
-    #get a random salt to make it more secure, we need to keep track of this salt that we use to use 
+    #get a random salt to make it more secure, we need to keep track of this salt to use 
     #for the pbkdf2 and to store it in the db so we can access it
     salt=salter()
-    #get the hash of user_pass/a
-    digest=hasher(a, salt) #send the password and the salt to the  hasher
+    #send the password and the salt to get the hasher
+    digest=hasher(a, salt)
      
 
-    #if the user enter the password correct both times we store in dict if its a new user/email wasnt used before 
+    #if the user enter the password correct both times we store in dict 
+    #if its a new user/email wasnt used before 
     # okay so we generate a salt , then we take the salt and password to the hash
     #then we open up the db and we store the salt in hex and the hasher in hex 
     #so then we to compate we need to take the stored salt with the entered password send that to hasher and see 
     #if the two match up
-    #
     if em not in db:
         #we need to pass the salt from previous
         #we need to make it from bytes to string, we passed digest as a hash
@@ -178,6 +165,7 @@ def verify_user():
         #now we compare if the hash above is equal to the stored has
         #we are getting the second element of the tuple which is the hash of the salt and password
         #and we comapre it with the newly generated hash
+        #DO WE NEED TO CHANGE BYTE/HEX
         if db[user_email][1]==hex_ver:
             print("user logged in successful")
             return
