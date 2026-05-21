@@ -1,6 +1,8 @@
 # hashPass
 Building a Python CLI authentication system demonstrating password hashing, credential verification, and input validation. The user will enter their email and password, the code will compare the entered passwords hash with the stored passwords hash to verify the user. It will also give the user an opportunity to create an account.
 
+Building a Python CLI authentication system demonstrating secure password storage, credential verification, and input validation. The project uses PBKDF2-HMAC-SHA256 with per-user salts to securely hash passwords and stores user credentials using persistent file-based storage. Users can create accounts and log in by entering their email and password, which are verified against stored hashed credentials.
+
 Features:
 - Password hashing using salt and PBDKF2
 - salt generating
