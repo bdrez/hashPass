@@ -1,5 +1,5 @@
 # hashPass
-#update about pbkdf2
+# update about pbkdf2
 Building a Python CLI authentication system demonstrating password hashing, credential verification, and input validation. The user will enter their email and password, the code will compare the entered passwords hash with the stored passwords hash to verify the user. It will also give the user an opportunity to create an account.
 
 Features:
