@@ -178,7 +178,6 @@ def verify_user():
         #now we compare if the hash above is equal to the stored has
         #we are getting the second element of the tuple which is the hash of the salt and password
         #and we comapre it with the newly generated hash
-        #DO WE NEED TO CHANGE BYTE/HEX
         if db[user_email][1]==hex_ver:
             print("user logged in successful")
             return
