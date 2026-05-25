@@ -1,5 +1,5 @@
 # hashPass
-Building a Python CLI authentication system demonstrating password storage and hashing, credential verification, and input validation. This project uses PBKDF2-HMAC-SHA256 with salt 2for ever user to securely hash thier password and stores user credentials using presistenet file based storage. Users can create account and log in by enetering their email and password, which are verified against stored hashed credentials. 
+Building a Python CLI authentication system demonstrating password storage and hashing, credential verification, and input validation. This project uses PBKDF2-HMAC-SHA256 with salt for every user to securely hash their password and store their user credentials using presistenet file based storage. Users can create account and log in by enetering their email and password, which are verified against stored hashed credentials. 
 
 Features:
 - Password hashing using salt and PBDKF2
