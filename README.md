@@ -22,3 +22,7 @@ A stronger and more secure algorithm is **PBKDF2-HMAC-SHA256**, this combinds a 
 To illustrate the difference I pasted my test case dictionary below. Both values are the hashed version of '123'. The first value used the MD5 algorithm and the second value used the SHA256.
 
 db={'keyMD5': '202cb962ac59075b964b07152d234b70', 'keySHA':'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
+
+# Current Database Storage format
+The current database format includes the users email, their randomly generated salt, and the hash which combinds the salt and password.
+b@gmail.com b31b8737a83b3aaffab511ae58c281d7 2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346
