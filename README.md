@@ -2,11 +2,14 @@
 Building a Python CLI authentication system demonstrating password storage and hashing, credential verification, and input validation. This project uses PBKDF2-HMAC-SHA256 with salt for every user to securely hash their password and store their user credentials using presistenet file based storage. Users can create account and log in by enetering their email and password, which are verified against stored hashed credentials. 
 
 Features:
-- Password hashing using salt and PBDKF2
-- salt generating
-- Credential verification for login
-- Email format validation with regex
-- Account creation for new users
+- Account creation and login
+- Password hashing with salt and PBDKF2-HMAC-SHA256
+- Random salt generating per user
+- Credential verification
+- Regex email validation
+- Persisten file based storage
+- Hidden password input using getpass
+- Limited login attempts
 
 
 
