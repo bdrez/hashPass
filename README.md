@@ -17,7 +17,7 @@ Hashing is the process of converting data into fixed size values (a hash) using 
 
 One common hashing algorithm is **MD5 (Message Digest Algorithm 5)**, which generates a 128-bit hash value. However, MD5 has limited unique values, which can lead to collisions (when two different inputs produce the same hash). Because of these vulnerabilities, it is not recommended for security critical applications.  I originally started out using MD5 [hashPashMD5](hashPashMD5) in my code because thats what i learned in class, but i looked more into the hashlib (https://docs.python.org/3/library/hashlib.html) and chose a safe version. 
 
-A stronger and more secure algorithm is **SHA256 (Secure Hash Algorithm)**, which generates a 256-bit hash value. The longer hash digest increases security and makes it much harder to produce collisions, enhancing the overall strength of the hash.  
+A stronger and more secure algorithm is **PBKDF2-HMAC-SHA256**, this combinds a password with a salt and hashes it using SHA256 hundreds of thousands of times. The **SHA256** generates a 256-bit hash value. The longer hash digest increases security and makes it much harder to produce collisions, enhancing the overall strength of the hash.  
 
 To illustrate the difference I pasted my test case dictionary below. Both values are the hashed version of '123'. The first value used the MD5 algorithm and the second value used the SHA256.
 
