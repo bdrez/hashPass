@@ -4,4 +4,4 @@ import re
 
 def pssWrd(pas):
     print("Check password against rules")
-    return false #temp
+    return False #temp
