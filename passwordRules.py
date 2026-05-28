@@ -9,10 +9,10 @@ def pssWrd(pas):
     if len(pas)>=8:
         #Once its 8 or more charchters we can no check for pattern
         #check pattern seperately so we can clearly say what they are missing 
-        patternUpper=""
-        patternLower=""
-        patternNum=""
-        patternSpec="[a-z]*"
+        patternUpper="[A-Z]+" #needs to include at least one upper case
+        patternLower="[a-z]+" #needs to include at least one lower case
+        patternNum="[0-9]+" #needs to include at least one number
+        patternSpec="[`~!@#$%^&*()_-+={\'}\]:;\[?/>.<,\"]+" #needs to include one speical charchterhow to include [] "'think need ""
     #or we can do variables 
     #variables for each to check
 
