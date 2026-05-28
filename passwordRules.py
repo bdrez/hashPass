@@ -15,13 +15,30 @@ def pssWrd(pas):
         patternSpec="[`~!@#$%^&*()_-+={\'}\]:;\[?/>.<,\"]+" #needs to include one speical charchterhow to include [] "'think need ""
     #or we can do variables 
     #variables for each to check
-
+    
+    #we want to let them know all the check they didnt pass to make a stronger password 
+    #so will set a flag called retCount so it wont return on first instance of missing , if the flag is greater than 0 returns false
+        retCount=0
         if patternUpper!=None and patternLower!=None and patternNum!=None and patternSpec!=None:
             #we get none if the pattern wasnt found, all pattenrs are found the password is good
             #nested inside the length check 
             return True
-        else:
+        if patternUpper==None:
+            print("Password needs an uppercase charachter.")
+            retCount+=1
+        if patternLower==None:
+            print("Password needs a lowercase charchter.")
+            retCount+=1
+        if patternNum==None:
+            print("Password needs a number charchter.")
+            retCount+=1
+        if patternSpec==None:
+            print("Password needs a speical charchter. ")
+            retCount+=1
+        if retCount>0:
             return False
+
+            
     eightChar=False 
     upperChar=False
     lowerChar=False
