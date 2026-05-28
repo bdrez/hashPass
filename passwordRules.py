@@ -16,10 +16,12 @@ def pssWrd(pas):
     #or we can do variables 
     #variables for each to check
 
-    if patternUpper!=None and patternLower!=None and patternNum!=None and patternSpec!=None:
-        return True
-    else:
-        return False
+        if patternUpper!=None and patternLower!=None and patternNum!=None and patternSpec!=None:
+            #we get none if the pattern wasnt found, all pattenrs are found the password is good
+            #nested inside the length check 
+            return True
+        else:
+            return False
     eightChar=False 
     upperChar=False
     lowerChar=False
