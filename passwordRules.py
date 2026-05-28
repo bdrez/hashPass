@@ -4,4 +4,17 @@ import re
 
 def pssWrd(pas):
     #print("Check password against rules")
-    return False #temp
+    #variables for each to check
+    eightChar=False 
+    upperChar=False
+    lowerChar=False
+    numChar=False
+    specChar=False
+
+    if eightChar!=True and upperChar!=True and lowerChar!=True and numChar!=True and specChar!=True:
+        #need to check bec regarding re we recieve none
+        return False
+    else:
+        #password hits all requierments
+        return True
+  
