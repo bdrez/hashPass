@@ -8,8 +8,18 @@ def pssWrd(pas):
     #firs we have to check length 
     if len(pas)>=8:
         #Once its 8 or more charchters we can no check for pattern
+        #check pattern seperately so we can clearly say what they are missing 
+        patternUpper=""
+        patternLower=""
+        patternNum=""
+        patternSpec=""
     #or we can do variables 
     #variables for each to check
+
+    if patternUpper!=None and patternLower!=None and patternNum!=None and patternSpec!=None:
+        return True
+    else:
+        return False
     eightChar=False 
     upperChar=False
     lowerChar=False
