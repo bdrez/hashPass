@@ -1,3 +1,7 @@
 import re
 #implement password rules
-#need 8 charchters, one upper case, one speicla charchter and one letter minimum
+#Password must contain 8 Charchters 1 Uppercase letter 1 Lower case letter 1 number 1 Special charchter
+
+def pssWrd(pas):
+    print("Check password against rules")
+    return false #temp
