@@ -12,7 +12,7 @@ def pssWrd(pas):
         patternUpper=""
         patternLower=""
         patternNum=""
-        patternSpec=""
+        patternSpec="[a-z]*"
     #or we can do variables 
     #variables for each to check
 
