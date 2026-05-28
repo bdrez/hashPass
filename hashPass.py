@@ -75,11 +75,11 @@ def input_new_user():
         else:
             print("Bye!")
             return 
-    print("Password must contain \n8 Charchters \n1 Uppercase letter \n1 Lower case letter \n1 number \n1 Special charchter")
+    print("Password must contain: \n-8 Charchters \n-1 Uppercase letter \n-1 Lowercase letter \n-1 number \n-1 Special charchter")
     user_pass = getpass.getpass("Enter Password: ")
     pa_flag=pssWrd(user_pass)#IMPORTED FROM PASS RULES checking the password follows policy for storng password
     while pa_flag==False:
-        print("Password must contain \n8 Charchters \n1 Uppercase letter \n1 Lower case letter \n1 number \n1 Special charchter")
+        print("\nInvalid Password\nPassword must contain \n-8 Charchters \n-1 Uppercase letter \n-1 Lowercase letter \n-1 number \n-1 Special charchter")
         user_pass = getpass.getpass("Enter Password: ")
         pa_flag=pssWrd(user_pass)
     double_pass = getpass.getpass("Password: ")
