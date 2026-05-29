@@ -18,11 +18,14 @@ def pssWrd(pas):
     
 
     #SEE UP RE SEARCHING
-    
+        patUp=re.search(patternUpper, pas)
+        patLo=re.search(patternLower,pas)
+        patNum=re.search(patternNum, pas)
+        patSpe=re.search(patternSpec, pas)
     #we want to let them know all the check they didnt pass to make a stronger password 
     #so will set a flag called retCount so it wont return on first instance of missing , if the flag is greater than 0 returns false
         retCount=0
-        if patternUpper!=None and patternLower!=None and patternNum!=None and patternSpec!=None:
+        if patUp!=None and patLo!=None and patNum!=None and patSpe!=None:
             #we get none if the pattern wasnt found, all pattenrs are found the password is good
             #nested inside the length check 
             return True
