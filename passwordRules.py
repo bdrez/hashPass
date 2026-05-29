@@ -16,6 +16,9 @@ def pssWrd(pas):
     #or we can do variables 
     #variables for each to check
     
+
+    #SEE UP RE SEARCHING
+    
     #we want to let them know all the check they didnt pass to make a stronger password 
     #so will set a flag called retCount so it wont return on first instance of missing , if the flag is greater than 0 returns false
         retCount=0
@@ -37,18 +40,6 @@ def pssWrd(pas):
             retCount+=1
         if retCount>0:
             return False
-
-            
-    eightChar=False 
-    upperChar=False
-    lowerChar=False
-    numChar=False
-    specChar=False
-
-    if eightChar!=True and upperChar!=True and lowerChar!=True and numChar!=True and specChar!=True:
-        #need to check bec regarding re we recieve none
-        return False
-    else:
-        #password hits all requierments
-        return True
+    print("Password must be 8 charchters minimum.")
+        
   
