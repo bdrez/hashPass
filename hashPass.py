@@ -77,8 +77,8 @@ def input_new_user():
             return 
     print("Password must contain: \n-8 Charchters \n-1 Uppercase letter \n-1 Lowercase letter \n-1 number \n-1 Special charchter")
     user_pass = getpass.getpass("Enter Password: ")
-    print("Password must be 8 charchters minimum.")
-    user_pass = getpass.getpass("Enter Password: ")
+    #print("Password must be 8 charchters minimum.")
+    #user_pass = getpass.getpass("Enter Password: ")
     pa_flag=pssWrd(user_pass)#IMPORTED FROM PASS RULES checking the password follows policy for storng password
     while pa_flag==False:
         print("\nInvalid Password\nPassword must contain \n-8 Charchters \n-1 Uppercase letter \n-1 Lowercase letter \n-1 number \n-1 Special charchter")

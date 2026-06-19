@@ -32,6 +32,8 @@ def pssWrd(pas):
             #we get none if the pattern wasnt found, all pattenrs are found the password is good
             #nested inside the length check 
         return True
+    if passCount==False:
+        print("Password must contain 8 charchters")
     if patUp==None:
         print("Password needs an uppercase charachter.")
         retCount+=1
