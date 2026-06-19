@@ -16,7 +16,9 @@ def pssWrd(pas):
     patternUpper="[A-Z]+" #needs to include at least one upper case
     patternLower="[a-z]+" #needs to include at least one lower case
     patternNum="[0-9]+" #needs to include at least one number
-    patternSpec="[`~!@#$%^&*()_'\'-\+={\'}\]:;\[?/>.<,\"]+" #needs to include one speical charchterhow to include [] "'think need ""
+    #patternSpec="[`~!@#$%^&*()_'\'-\+={\'}\]:;\[?/>.<,\"]+" #needs to include one speical charchterhow to include [] "'think need ""
+    #using the not operation - so not an upper or lower case letter and not a number - means its a special charchter easier
+    patternSpec="[^A-Za-z0-9]"
     #or we can do variables 
     #variables for each to check
 
