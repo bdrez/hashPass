@@ -6,11 +6,14 @@ def pssWrd(pas):
     #print("Check password against rules")
     #or we can just make a general patten and check 
     #firs we have to check length 
-    while len(pas)>8:
-        print("Password must be 8 charchters minimum.")
-        return False
+    #while len(pas)>8:
+        ##return False
         #Once its 8 or more charchters we can no check for pattern
         #check pattern seperately so we can clearly say what they are missing 
+    if len(pas)>8:
+        passCount=False
+    else:
+        passCount=True
     patternUpper="[A-Z]+" #needs to include at least one upper case
     patternLower="[a-z]+" #needs to include at least one lower case
     patternNum="[0-9]+" #needs to include at least one number
@@ -26,7 +29,7 @@ def pssWrd(pas):
     #we want to let them know all the check they didnt pass to make a stronger password 
     #so will set a flag called retCount so it wont return on first instance of missing , if the flag is greater than 0 returns false
     retCount=0
-    if patUp!=None and patLo!=None and patNum!=None and patSpe!=None:
+    if passCount==True and patUp!=None and patLo!=None and patNum!=None and patSpe!=None:
             #we get none if the pattern wasnt found, all pattenrs are found the password is good
             #nested inside the length check 
         return True
