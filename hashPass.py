@@ -82,16 +82,15 @@ def input_new_user():
     #print("Password must be 8 charchters minimum.")
     #user_pass = getpass.getpass("Enter Password: ")
     while pa_flag==False:
-        print("\nInvalid Password\nPassword must contain \n-8 Charchters \n-1 Uppercase letter \n-1 Lowercase letter \n-1 number \n-1 Special charchter")
-        user_pass = getpass.getpass("Enter Password: ")
+        print("\nInvalid Password!")
         pa_flag=pssWrd(user_pass)
     double_pass = getpass.getpass("Password: ")
     #check if the password (plain text verision) match before we pass it on and hash them
     #check if the two passwords entered are the same, we dont need to check if it matches the policy bec the first password does
     #and we wouldnt be able to get out of the loop
     while user_pass!=double_pass:
-        print("Password does not match! Please re-enter password.")
-        couble_pass = getpass.getpass("Confirm Password: ")
+        print("Password does not match! /nPlease re-enter password.")
+        double_pass = getpass.getpass("Confirm Password: ")
 
     register_User(user_email, user_pass)
 

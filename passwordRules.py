@@ -5,18 +5,18 @@ import re
 def pssWrd(pas):
     #print("Check password against rules")
     #or we can just make a general patten and check 
-    #while len(pas)<8:
+    #while len(pas)>8:
         ##return False
         #Once its 8 or more charchters we can no check for pattern
         #check pattern seperately so we can clearly say what they are missing 
-    if len(pas)>8: #check if it 8 or more charchter 
+    if len(pas)<8: #check if it 8 or more charchter 
         passCount=False
     else:
         passCount=True
     patternUpper="[A-Z]+" #needs to include at least one upper case
     patternLower="[a-z]+" #needs to include at least one lower case
     patternNum="[0-9]+" #needs to include at least one number
-    patternSpec="[`~!@#$%^&*()_\-\+={\'}\]:;\[?/>.<,\"]+" #needs to include one speical charchterhow to include [] "'think need ""
+    patternSpec="[`~!@#$%^&*()_'\'-\+={\'}\]:;\[?/>.<,\"]+" #needs to include one speical charchterhow to include [] "'think need ""
     #or we can do variables 
     #variables for each to check
 
@@ -32,21 +32,26 @@ def pssWrd(pas):
             #we get none if the pattern wasnt found, all pattenrs are found the password is good
             #nested inside the length check 
         return True
+    print("\n")
     if passCount==False:
-        print("Password must contain 8 charchters")
+        print("Password missing 8 charchters")
         retCount+=1
     if patUp==None:
-        print("Password needs an uppercase charachter.")
+        print("Password missing an uppercase charachter.")
         retCount+=1
     if patLo==None:
-        print("Password needs a lowercase charchter.")
+        print("Password missing a lowercase charchter.")
         retCount+=1
     if patNum==None:
-        print("Password needs a number charchter.")
+        print("Password missing a number charchter.")
         retCount+=1
     if patSpe==None:
-        print("Password needs a speical charchter. ")
+        print("Password missing a special charchter. ")
         retCount+=1
 
     if retCount>0:
-        return False  
+        return False
+
+    
+        
+  
