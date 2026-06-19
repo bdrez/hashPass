@@ -82,7 +82,8 @@ def input_new_user():
     #print("Password must be 8 charchters minimum.")
     #user_pass = getpass.getpass("Enter Password: ")
     while pa_flag==False:
-        print("\nInvalid Password!")
+        print("\nInvalid Password\n")
+        user_pass = getpass.getpass("Enter Password: ")
         pa_flag=pssWrd(user_pass)
     double_pass = getpass.getpass("Password: ")
     #check if the password (plain text verision) match before we pass it on and hash them
