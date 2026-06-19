@@ -34,6 +34,7 @@ def pssWrd(pas):
         return True
     if passCount==False:
         print("Password must contain 8 charchters")
+        retCount+=1
     if patUp==None:
         print("Password needs an uppercase charachter.")
         retCount+=1
@@ -46,9 +47,11 @@ def pssWrd(pas):
     if patSpe==None:
         print("Password needs a speical charchter. ")
         retCount+=1
+
     if retCount>0:
         return False
     else:
         return True
+    
         
   
