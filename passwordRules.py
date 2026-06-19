@@ -5,12 +5,11 @@ import re
 def pssWrd(pas):
     #print("Check password against rules")
     #or we can just make a general patten and check 
-    #firs we have to check length 
     #while len(pas)>8:
         ##return False
         #Once its 8 or more charchters we can no check for pattern
         #check pattern seperately so we can clearly say what they are missing 
-    if len(pas)>8:
+    if len(pas)>8: #check if it 8 or more charchter 
         passCount=False
     else:
         passCount=True
