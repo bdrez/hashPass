@@ -49,9 +49,4 @@ def pssWrd(pas):
         retCount+=1
 
     if retCount>0:
-        return False
-    else:
-        return True
-    
-        
-  
+        return False  
