@@ -1,17 +1,23 @@
 # hashPass
-Building a Python CLI authentication system demonstrating password storage and hashing, credential verification, and input validation. This project uses PBKDF2-HMAC-SHA256 with salt for every user to securely hash their password and store their credentials using presistenet file based storage. Users can create account or log in by enetering their email and password, which are verified against stored hashed credentials. 
+Building a Python CLI authentication system demonstrating secure password storage, credential verification, and input validation.
 
-# Features:
-- Account creation and login
-- Password hashing with salt and PBDKF2-HMAC-SHA256
-- Random salt generating per user
-- Credential verification
-- Regex email validation
+This project implements password hashing using PBKDF2-HMAC-SHA256 with a unique random salt for each  user. Users credentials are stored using persistent file based storage, allowing users to create accounts and securely authenticate by verifying enter credentials against stored password hashes.  
+
+## Features:
+- Account creation and login authentication
+- Password hashing using PBDKF2-HMAC-SHA256
+- Unique random salt generation for every user
+- Secure password verification
+- Password complexity validation
+- Regex based email validation
 - Persistent file based storage
-- Hidden password input using getpass
+- Hidden password input using getpass module
 - Limited login attempts
 
+
 # Security concepts
+
+## Password hashing
 Hashing is the process of converting data into fixed size values (a hash) using a hash function. Even small changes to the input will produce a different hash. This helps us to detect data tampering when we compare the previous and current hashes. Hashing is commonly used for password storage and data integrity verification. 
 
 One common hashing algorithm is **MD5 (Message Digest Algorithm 5)**, which generates a 128-bit hash value. However, MD5 has limited unique values, which can lead to collisions (when two different inputs produce the same hash). Because of these vulnerabilities, it is not recommended for security critical applications.  I originally started out using MD5 [hashPassMD5](Verision%1/hashPassMD5.py) in my code because thats what i learned in class, but i looked more into the hashlib (https://docs.python.org/3/library/hashlib.html) and chose a safer version. 
