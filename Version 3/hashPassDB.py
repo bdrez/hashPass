@@ -25,7 +25,21 @@ con=sqlite3.connect("hashPass.db")
 curs=con.cursor()
 
 #creating our db table user and the column names flexible typing no declartion
-cur.execute("CREATE TABLE user(email, salt, hash)")
+curs.execute("CREATE TABLE user(email, salt, hash)")
+
+#set up test data in    
+curs.execute("""
+    INSERT INTO user VALUES
+    ('b@gmail.com', b31b8737a83b3aaffab511ae58c281d7, 2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346)
+""")
+
+#commit change to db to be saved
+con.commit()
+
+#see if the info went in the db
+resul=curs.execute("SELECT * FROM user")
+resul.fetchall()
+
 #add account lock out timer
 
 def user_status(): 
