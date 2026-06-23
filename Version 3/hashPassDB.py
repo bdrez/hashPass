@@ -38,7 +38,7 @@ con.commit()
 
 #see if the info went in the db
 resul=curs.execute("SELECT * FROM user")
-resul.fetchall()
+print(resul.fetchall())
 
 #add account lock out timer
 
