@@ -33,10 +33,10 @@ curs=con.cursor()
 #curs.execute("CREATE TABLE user(email, salt, hash)")
 
 #set up test data 
-curs.execute("""
-    INSERT INTO user VALUES
-    ('b@gmail.com', 'b31b8737a83b3aaffab511ae58c281d7', '2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346')
-""")
+#curs.execute("""
+    #INSERT INTO user VALUES
+    #('b@gmail.com', 'b31b8737a83b3aaffab511ae58c281d7', '2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346')
+#""")
 
 
 #commit change to db to be saved
