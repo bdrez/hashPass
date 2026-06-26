@@ -35,7 +35,7 @@ curs=con.cursor()
 #set up test data 
 #curs.execute("""
     #INSERT INTO user VALUES
-    #('b@gmail.com', 'b31b8737a83b3aaffab511ae58c281d7', '2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346')
+   # ('b@gmail.com', 'b31b8737a83b3aaffab511ae58c281d7', '2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346')
 #""")
 
 
@@ -43,8 +43,8 @@ curs=con.cursor()
 con.commit()
 
 #see if the info went in the db
-resul=curs.execute("SELECT * FROM user")
-print(resul.fetchall())
+#resul=curs.execute("SELECT * FROM user")
+#print(resul.fetchall())
 
 
 #add account lock out timer
@@ -95,16 +95,21 @@ def input_new_user():
         user_email =input("Enter your email: ")
         em_flag=email_ending(user_email)
     #do something to make sure they cannot enter nothing-for both 
-    if user_email in db:
-        resp=input('Account already created. Enter yes to sign in and no to exit: ')
-        while not resp or resp[0].lower() not in ("y","n"):
-            resp=input("Invalid response. Enter yes to log in and no to leave: ")
-        if resp[0].lower()=='y' :
-            verify_user()
-            return #do this to get rid of bug if they press yes new account but enter exisiting email
-        else:
-            print("Bye!")
-            return 
+    #CHANGE TO db
+    for row in curs.execute("SELECT * FROM user WHERE email=?",
+    (user_email,)):
+        row=result.fetchone()
+        if row!=None:
+            print("Account already exist, yay you did it")
+            resp=input('Account already created. Enter yes to sign in and no to exit: ')
+            while not resp or resp[0].lower() not in ("y","n"):
+                resp=input("Invalid response. Enter yes to log in and no to leave: ")
+            if resp[0].lower()=='y' :
+                verify_user()
+                return #do this to get rid of bug if they press yes new account but enter exisiting email
+            else:
+                print("Bye!")
+                return 
     print("Password must contain: \n-8 Charchters \n-1 Uppercase letter \n-1 Lowercase letter \n-1 number \n-1 Special charchter")
     #display password rules, enter password and check if follows rule, if fails loop until sucseeds, exit loop and make sure enter same thing twice
     user_pass = getpass.getpass("Enter Password: ")
