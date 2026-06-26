@@ -28,16 +28,11 @@ curs=con.cursor()
 #created it once dont need to recreate it each time
 #curs.execute("CREATE TABLE user(email, salt, hash)")
 
-#set up test data in    
-#set up test db once dont need to reset
-#curs.execute("CREATE TABLE user(email, salt, hash)")
-
 #set up test data 
 #curs.execute("""
     #INSERT INTO user VALUES
    # ('b@gmail.com', 'b31b8737a83b3aaffab511ae58c281d7', '2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346')
 #""")
-
 
 #commit change to db to be saved
 con.commit()
@@ -45,7 +40,6 @@ con.commit()
 #see if the info went in the db
 #resul=curs.execute("SELECT * FROM user")
 #print(resul.fetchall())
-
 
 #add account lock out timer
 
@@ -95,12 +89,11 @@ def input_new_user():
         user_email =input("Enter your email: ")
         em_flag=email_ending(user_email)
     #do something to make sure they cannot enter nothing-for both 
-    #CHANGE TO db
     result= curs.execute("SELECT * FROM user WHERE email=?",
     (user_email,))
     row=result.fetchone()
     if row!=None:
-        print("Account already exist, yay you did it")
+        #print("Account already exist, yay you did it")
         resp=input('Account already created. Enter yes to sign in and no to exit: ')
         while not resp or resp[0].lower() not in ("y","n"):
             resp=input("Invalid response. Enter yes to log in and no to leave: ")
@@ -146,7 +139,11 @@ def register_User(em,a):
     #then we open up the db and we store the salt in hex and the hasher in hex 
     #so then we to compate we need to take the stored salt with the entered password send that to hasher and see 
     #if the two match up
-    if em not in db:
+    #CHANGE TO DB
+    result= curs.execute("SELECT * FROM user WHERE email=?",
+    (em,))
+    row=result.fetchone()
+    if row==None:
         #we need to pass the salt from previous
         #we need to make it from bytes to string, we passed digest as a hash
         db[em]= salt.hex(), digest
