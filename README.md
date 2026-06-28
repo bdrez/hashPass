@@ -62,7 +62,7 @@ db={
 
 # Future Improvements
 
-- Migrate file-based storage to SQLite database (In Progress)
+- Migrate file-based storage to SQLite database "(In Progress)"
 - Add security event logging
 - Implement account lockout timers
 - Implement multi-factor authentication (MFA)
