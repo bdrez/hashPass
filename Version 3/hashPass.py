@@ -38,8 +38,8 @@ curs=con.cursor()
 con.commit()
 
 #see if the info went in the db
-#resul=curs.execute("SELECT * FROM user")
-#print(resul.fetchall())
+resul=curs.execute("SELECT * FROM user")
+print(resul.fetchall())
 
 #add account lock out timer
 
@@ -148,8 +148,8 @@ def register_User(em,a):
         #to bind python values to sql statements to avoid sql injection attacks
         curs.execute(""" 
         INSERT INTO user VALUES
-        (?, ?, ?)"""
-        ('em'), ('salt.hex'), ('digest'))
+        (?, ?, ?)""",
+        (em, salt.hex(), digest))
         #we need to pass the salt from previous
         #we need to make it from bytes to string, we passed digest as a hash
         #db[em]= salt.hex(), digest
