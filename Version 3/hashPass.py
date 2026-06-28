@@ -144,15 +144,21 @@ def register_User(em,a):
     (em,))
     row=result.fetchone()
     if row==None:
+        #use a place holder and pass the python variable seperatly
+        #to bind python values to sql statements to avoid sql injection attacks
+        curs.execute(""" 
+        INSERT INTO user VALUES
+        (?, ?, ?)"""
+        ('em'), ('salt.hex'), ('digest'))
         #we need to pass the salt from previous
         #we need to make it from bytes to string, we passed digest as a hash
-        db[em]= salt.hex(), digest
+        #db[em]= salt.hex(), digest
         #OPEN FILE AND WRITE TO OUR DB
         #a will append to end of the file (w will overwrite everything)
-        with open ('hashPassdb.txt', "a") as file_object:
+        #with open ('hashPassdb.txt', "a") as file_object:
             #we need to write the information in our file/"db" now that we used dictionary and know it doesnt exist
             #.hex will convert the byte to a prinatble string
-            file_object.write("\n" + em +" "+salt.hex()+" "+digest)
+            #file_object.write("\n" + em +" "+salt.hex()+" "+digest)
         print("User entered into database.")
         #print(db) print db for testing
             #now give them the opportunity to log in 
