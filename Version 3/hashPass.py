@@ -5,19 +5,6 @@ from regexRegulator import email_ending #import to ensure they enter an email
 from passwordRules import pssWrd
 import sqlite3
 
-#create out dict that we will use to store email/password
-'''db={ }#test case
-#{'b@gmail.com': '202cb962ac59075b964b07152d234b70', 'a@gmail.com': 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'}
-print("Welcome!")
-#opening to read it, we dont need to write r just makes it more clear 
-for line in open('hashPassdb.txt'):
-    #we need to loop to get everything
-    em_word,em_salt,em_hash=line.strip().split() #were striping any access space and splitting by a space
-    db[em_word]=(em_salt, em_hash)
-print("transfer complete")
-
-#build the dictionary here - open the db file and store it into dictionary so we have o(n) search '''
-
 #creating our db and opening a connection to it 
 con=sqlite3.connect("hashPass.db")
 
@@ -38,8 +25,7 @@ curs=con.cursor()
 con.commit()
 
 #see if the info went in the db
-resul=curs.execute("SELECT * FROM user")
-print(resul.fetchall())
+#print(resul.fetchall())
 
 #add account lock out timer
 
@@ -132,7 +118,6 @@ def register_User(em,a):
     #send the password and the salt to get the hasher
     digest=hasher(a, salt)
      
-
     #if the user enter the password correct both times we store in dict 
     #if its a new user/email wasnt used before 
     # okay so we generate a salt , then we take the salt and password to the hash
@@ -150,6 +135,7 @@ def register_User(em,a):
         INSERT INTO user VALUES
         (?, ?, ?)""",
         (em, salt.hex(), digest))
+        con.commit() #commit to db
         #we need to pass the salt from previous
         #we need to make it from bytes to string, we passed digest as a hash
         #db[em]= salt.hex(), digest
@@ -173,6 +159,8 @@ def register_User(em,a):
             print("Bye!")
             # only be used inside of a loop break  
             return  
+    else:   
+        return     #already checked before we passed it to the function
 
 def verify_user():
     user_email =input("enter your email ")
@@ -184,7 +172,11 @@ def verify_user():
          em_flag=email_ending(user_email)
 
     #once we check if its a legal email address we need to even check if it exist before we ask for password
-    if user_email not in db:
+    #CHANGED TO DB
+    result= curs.execute("SELECT * FROM user WHERE email=?",
+    (user_email,))
+    row=result.fetchone()
+    if row==None:
             print("Invalid login!")
             #dont tell them what the issue is - more secure
             resp=input("Press y to create an account. Press n to exit program: ")
