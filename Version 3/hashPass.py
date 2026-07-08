@@ -198,6 +198,7 @@ def verify_user():
         #we have to encode the salt bec we stored it as a hex string in our dictionary
         #we are getting the inver back to byte
         #getting first element of the tuple
+        #CHANGE TO SQL
         salt_hex=db[user_email][0]
         #we convert the salt back to byte (hex in doc easier to read)
         salt_byte=bytes.fromhex(salt_hex)
@@ -207,6 +208,10 @@ def verify_user():
         #we are getting the second element of the tuple which is the hash of the salt and password
         #and we comapre it with the newly generated hash
         #DO WE NEED TO CHANGE BYTE/HEX
+        #CHANGE TO SQL
+        hex_result= curs.execute("SELECT * FROM user WHERE email=?",
+        (user_email,))
+        row=result.fetchone()
         if db[user_email][1]==hex_ver:
             print("user logged in successful")
             return
