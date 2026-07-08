@@ -124,7 +124,6 @@ def register_User(em,a):
     #then we open up the db and we store the salt in hex and the hasher in hex 
     #so then we to compate we need to take the stored salt with the entered password send that to hasher and see 
     #if the two match up
-    #CHANGE TO DB
     result= curs.execute("SELECT * FROM user WHERE email=?",
     (em,))
     row=result.fetchone()
@@ -172,10 +171,10 @@ def verify_user():
          em_flag=email_ending(user_email)
 
     #once we check if its a legal email address we need to even check if it exist before we ask for password
-    #CHANGED TO DB
     result= curs.execute("SELECT * FROM user WHERE email=?",
     (user_email,))
     row=result.fetchone()
+    #row is the whole row of the db in a tuple 
     if row==None:
             print("Invalid login!")
             #dont tell them what the issue is - more secure
@@ -197,9 +196,8 @@ def verify_user():
         #since we have our email as the key in the db and the salt and hash as a tuple we do this
         #we have to encode the salt bec we stored it as a hex string in our dictionary
         #we are getting the inver back to byte
-        #getting first element of the tuple
-        #CHANGE TO SQL
-        salt_hex=db[user_email][0]
+        #getting the salt from the tuple as a result of our db
+        salt_hex=row[1]
         #we convert the salt back to byte (hex in doc easier to read)
         salt_byte=bytes.fromhex(salt_hex)
         #were passing out password string and our salt in byte to get hashed
@@ -208,10 +206,8 @@ def verify_user():
         #we are getting the second element of the tuple which is the hash of the salt and password
         #and we comapre it with the newly generated hash
         #DO WE NEED TO CHANGE BYTE/HEX
-        #CHANGE TO SQL
-        hex_result= curs.execute("SELECT * FROM user WHERE email=?",
-        (user_email,))
-        row=result.fetchone()
+        #if the second element of the sql tuple which is the hash equal to the hash we just made
+        if row[2]==hex_ver:
         if db[user_email][1]==hex_ver:
             print("user logged in successful")
             return
