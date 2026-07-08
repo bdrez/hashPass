@@ -30,7 +30,6 @@ con.commit()
 #add account lock out timer
 
 def user_status(): 
-    
     #show welcoming message and menu 
     while True:
         print("\nEnter the number to choose an option: \n")
@@ -79,7 +78,6 @@ def input_new_user():
     (user_email,))
     row=result.fetchone()
     if row!=None:
-        #print("Account already exist, yay you did it")
         resp=input('Account already created. Enter yes to sign in and no to exit: ')
         while not resp or resp[0].lower() not in ("y","n"):
             resp=input("Invalid response. Enter yes to log in and no to leave: ")
@@ -93,8 +91,6 @@ def input_new_user():
     #display password rules, enter password and check if follows rule, if fails loop until sucseeds, exit loop and make sure enter same thing twice
     user_pass = getpass.getpass("Enter Password: ")
     pa_flag=pssWrd(user_pass)#IMPORTED FROM PASS RULES checking the password follows policy for storng password
-    #print("Password must be 8 charchters minimum.")
-    #user_pass = getpass.getpass("Enter Password: ")
     while pa_flag==False:
         print("Invalid Password\n")
         user_pass = getpass.getpass("Enter Password: ")
@@ -106,7 +102,6 @@ def input_new_user():
     while user_pass!=double_pass:
         print("Password does not match! \nPlease re-enter password.")
         double_pass = getpass.getpass("Confirm Password: ")
-
     register_User(user_email, user_pass)
 
 
@@ -137,15 +132,7 @@ def register_User(em,a):
         con.commit() #commit to db
         #we need to pass the salt from previous
         #we need to make it from bytes to string, we passed digest as a hash
-        #db[em]= salt.hex(), digest
-        #OPEN FILE AND WRITE TO OUR DB
-        #a will append to end of the file (w will overwrite everything)
-        #with open ('hashPassdb.txt', "a") as file_object:
-            #we need to write the information in our file/"db" now that we used dictionary and know it doesnt exist
-            #.hex will convert the byte to a prinatble string
-            #file_object.write("\n" + em +" "+salt.hex()+" "+digest)
         print("User entered into database.")
-        #print(db) print db for testing
             #now give them the opportunity to log in 
         resp=input("Would you like to log in? Enter yes or no: ")
         #so were gonna check if the string exist if "" aka press enter the string is False
@@ -174,7 +161,7 @@ def verify_user():
     result= curs.execute("SELECT * FROM user WHERE email=?",
     (user_email,))
     row=result.fetchone()
-    #row is the whole row of the db in a tuple 
+    #row is the whole row of the db in a tuple that matched with the email
     if row==None:
             print("Invalid login!")
             #dont tell them what the issue is - more secure
@@ -205,18 +192,11 @@ def verify_user():
         #now we compare if the hash above is equal to the stored has
         #we are getting the second element of the tuple which is the hash of the salt and password
         #and we comapre it with the newly generated hash
-        #DO WE NEED TO CHANGE BYTE/HEX
         #if the second element of the sql tuple which is the hash equal to the hash we just made
         if row[2]==hex_ver:
             print("user logged in successful")
             return
-        #now that we know the user exists we dont have to loop through dictionary
-        #we can just check if thats the value
-        #if db[user_email]==hex_ver: # if teh dictionary key of the input users email euqals the value/password entered
-            #print("user logged in successful")
-            #return
         else:
-         #db[user_email]!=hex_ver:
             login_attempt-=1
             print("Password incorrect.")
 
