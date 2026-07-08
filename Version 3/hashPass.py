@@ -208,7 +208,6 @@ def verify_user():
         #DO WE NEED TO CHANGE BYTE/HEX
         #if the second element of the sql tuple which is the hash equal to the hash we just made
         if row[2]==hex_ver:
-        if db[user_email][1]==hex_ver:
             print("user logged in successful")
             return
         #now that we know the user exists we dont have to loop through dictionary
