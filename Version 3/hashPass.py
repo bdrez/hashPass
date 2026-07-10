@@ -4,6 +4,7 @@ import secrets #to help generate salt
 from regexRegulator import email_ending #import to ensure they enter an email
 from passwordRules import pssWrd
 import sqlite3
+import hmac
 
 #creating our db and opening a connection to it 
 con=sqlite3.connect("hashPass.db")
@@ -14,7 +15,7 @@ curs=con.cursor()
 
 #creating our db table user and the column names flexible typing no declartion
 #created it once dont need to recreate it each time
-curs.execute("CREATE TABLE IF NOT EXISTS user(email, salt, hash)")
+curs.execute("CREATE TABLE IF NOT EXISTS users(email, salt, hash)")
 
 
 #set up test data 
@@ -23,8 +24,6 @@ curs.execute("CREATE TABLE IF NOT EXISTS user(email, salt, hash)")
    # ('b@gmail.com', 'b31b8737a83b3aaffab511ae58c281d7', '2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346')
 #""")
 
-#rename table to users
-curs.execute("ALTER TABLE user RENAME TO users")
 
 #commit change to db to be saved
 #con.commit()
@@ -212,6 +211,7 @@ def verify_user():
     print("Bye!")
     return
 
-    con.close() #close connection
+  
 
 user_status()
+con.close() #close connection
