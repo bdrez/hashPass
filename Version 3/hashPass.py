@@ -29,7 +29,7 @@ users(email TEXT PRIMARY KEY,
 #""")
 
 #commit change to db to be saved
-#con.commit()
+con.commit()
 
 #see if the info went in the db
 #print(resul.fetchall())
@@ -126,15 +126,15 @@ def register_User(em,a):
     #then we open up the db and we store the salt in hex and the hasher in hex 
     #so then we to compate we need to take the stored salt with the entered password send that to hasher and see 
     #if the two match up
-    result= curs.execute("SELECT * FROM users WHERE email=?",
+    result= curs.execute("SELECT email FROM users WHERE email=?",
     (em,))
     row=result.fetchone()
     if row==None:
         #use a place holder and pass the python variable seperatly
         #to bind python values to sql statements to avoid sql injection attacks
         curs.execute(""" 
-        INSERT INTO users VALUES(email, salt, hash)
-        (?, ?, ?)""",
+        INSERT INTO users (email, salt, hash)
+        VALUES (?, ?, ?)""",
         (em, salt.hex(), digest))
         con.commit() #commit to db
         #we need to pass the salt from previous
@@ -215,6 +215,7 @@ def verify_user():
     return
 
   
-
-user_status()
-con.close() #close connection
+try:
+    user_status()
+finally:
+    con.close() #no matter what happens close the db 
