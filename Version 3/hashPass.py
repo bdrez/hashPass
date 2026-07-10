@@ -8,6 +8,7 @@ import sqlite3
 #creating our db and opening a connection to it 
 con=sqlite3.connect("hashPass.db")
 
+
 #creating a cusor to move around our db
 curs=con.cursor()
 
@@ -20,6 +21,9 @@ curs=con.cursor()
     #INSERT INTO user VALUES
    # ('b@gmail.com', 'b31b8737a83b3aaffab511ae58c281d7', '2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346')
 #""")
+
+#rename table to users
+curs.execute("ALTER TABLE user RENAME TO users")
 
 #commit change to db to be saved
 con.commit()
@@ -74,7 +78,7 @@ def input_new_user():
         user_email =input("Enter your email: ")
         em_flag=email_ending(user_email)
     #do something to make sure they cannot enter nothing-for both 
-    result= curs.execute("SELECT * FROM user WHERE email=?",
+    result= curs.execute("SELECT * FROM users WHERE email=?",
     (user_email,))
     row=result.fetchone()
     if row!=None:
@@ -119,14 +123,14 @@ def register_User(em,a):
     #then we open up the db and we store the salt in hex and the hasher in hex 
     #so then we to compate we need to take the stored salt with the entered password send that to hasher and see 
     #if the two match up
-    result= curs.execute("SELECT * FROM user WHERE email=?",
+    result= curs.execute("SELECT * FROM users WHERE email=?",
     (em,))
     row=result.fetchone()
     if row==None:
         #use a place holder and pass the python variable seperatly
         #to bind python values to sql statements to avoid sql injection attacks
         curs.execute(""" 
-        INSERT INTO user VALUES
+        INSERT INTO users VALUES
         (?, ?, ?)""",
         (em, salt.hex(), digest))
         con.commit() #commit to db
@@ -158,7 +162,7 @@ def verify_user():
          em_flag=email_ending(user_email)
 
     #once we check if its a legal email address we need to even check if it exist before we ask for password
-    result= curs.execute("SELECT * FROM user WHERE email=?",
+    result= curs.execute("SELECT * FROM users WHERE email=?",
     (user_email,))
     row=result.fetchone()
     #row is the whole row of the db in a tuple that matched with the email
