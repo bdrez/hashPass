@@ -14,7 +14,8 @@ curs=con.cursor()
 
 #creating our db table user and the column names flexible typing no declartion
 #created it once dont need to recreate it each time
-#curs.execute("CREATE TABLE user(email, salt, hash)")
+curs.execute("CREATE TABLE IF NOT EXISTS user(email, salt, hash)")
+
 
 #set up test data 
 #curs.execute("""
@@ -26,7 +27,7 @@ curs=con.cursor()
 curs.execute("ALTER TABLE user RENAME TO users")
 
 #commit change to db to be saved
-con.commit()
+#con.commit()
 
 #see if the info went in the db
 #print(resul.fetchall())
@@ -197,7 +198,10 @@ def verify_user():
         #we are getting the second element of the tuple which is the hash of the salt and password
         #and we comapre it with the newly generated hash
         #if the second element of the sql tuple which is the hash equal to the hash we just made
-        if row[2]==hex_ver:
+        #if row[2]==hex_ver:
+        #secure way to comapre hash whe using == python evalutes it charchter by charchter 
+        #An attacker can measure these microsecond differences to guess a secret token, API key, or cryptographic signature character-by-character.
+        if hmac.compare_digest(row[2], hex_ver):
             print("user logged in successful")
             return
         else:
@@ -207,5 +211,7 @@ def verify_user():
     print("Too many log in attempts!")
     print("Bye!")
     return
+
+    con.close() #close connection
 
 user_status()
