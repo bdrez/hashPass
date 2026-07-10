@@ -15,15 +15,18 @@ curs=con.cursor()
 
 #creating our db table user and the column names flexible typing no declartion
 #created it once dont need to recreate it each time
-curs.execute("CREATE TABLE IF NOT EXISTS users(email, salt, hash)")
-
+#store all text bec we convert the satl and hesh to hex
+#use primary key for email address os they cant be duplicates
+curs.execute("""CREATE TABLE IF NOT EXISTS 
+users(email TEXT PRIMARY KEY,
+ salt TEXT NOT NULL, 
+ hash TEXT NOT NULL)""")
 
 #set up test data 
 #curs.execute("""
     #INSERT INTO user VALUES
    # ('b@gmail.com', 'b31b8737a83b3aaffab511ae58c281d7', '2f2627c998d2b6e341b29bbf4d1b936e774b5e6d0b45724b582bc435391f1346')
 #""")
-
 
 #commit change to db to be saved
 #con.commit()
@@ -130,7 +133,7 @@ def register_User(em,a):
         #use a place holder and pass the python variable seperatly
         #to bind python values to sql statements to avoid sql injection attacks
         curs.execute(""" 
-        INSERT INTO users VALUES
+        INSERT INTO users VALUES(email, salt, hash)
         (?, ?, ?)""",
         (em, salt.hex(), digest))
         con.commit() #commit to db
